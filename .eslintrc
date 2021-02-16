@@ -1,0 +1,12 @@
+{
+  "extends": ["airbnb-base", "airbnb/hooks", "plugin:react/recommended"],
+  "rules": {
+    "no-underscore-dangle": "off"
+  },
+  "env": {
+    "browser": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020
+  }
+}
