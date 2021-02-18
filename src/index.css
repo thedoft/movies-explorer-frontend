@@ -1,6 +1,7 @@
 @import './vendor/fonts/Inter/inter.css';
 
 .root {
+  background: #f8f8f8;
   min-height: 100vh;
   min-width: 320px;
   font-family: 'Inter', 'Helvetica Neue', 'Arial', sans-serif;

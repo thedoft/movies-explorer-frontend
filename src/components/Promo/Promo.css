@@ -1,0 +1,25 @@
+.promo {
+  height: calc(100vh - 74px);
+  width: 100%;
+  padding: 0 70px 50px;
+  box-sizing: border-box;
+  background: #dddee3 url(../../images/promo.svg) no-repeat right 70px top 75px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.promo__title {
+  font-size: 50px;
+  line-height: 58px;
+  max-width: 640px;
+  margin: 75px 0 36px;
+}
+
+.promo__subtitle {
+  max-width: 310px;
+  font-size: 13px;
+  line-height: 16px;
+  opacity: .5;
+  margin: 0 0 146px;
+}

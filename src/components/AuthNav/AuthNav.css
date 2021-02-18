@@ -1,0 +1,25 @@
+.auth-nav {
+  display: flex;
+  align-items: center;
+}
+
+.auth-nav__link {
+  font-size: 12px;
+  line-height: 16px;
+  margin-right: 30px;
+  color: #000;
+  text-decoration: none;
+}
+
+.auth-nav__button {
+  border: none;
+  background: #3456f3;
+  height: 32px;
+  width: 76px;
+  border-radius: 3px;
+  color: #fff;
+}
+
+.auth-nav__button:hover {
+  cursor: pointer;
+}
