@@ -1,11 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './NavTab.css';
 
-const NavTab = () => (
-  <Link to="#about-project">
+const NavTab = ({ className }) => (
+  <a href="#about-project" className={className}>
     <button className="nav-tab">Узнать больше</button>
-  </Link>
+  </a>
 );
 
 export default NavTab;

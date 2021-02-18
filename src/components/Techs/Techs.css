@@ -1,0 +1,37 @@
+.techs {
+  padding: 100px 70px;
+}
+
+.techs__title {
+  margin-bottom: 90px;
+}
+
+.techs__subtitle {
+  margin: 0 0 26px;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  letter-spacing: -.04em;
+}
+
+.techs__text {
+  margin: 0 0 100px;
+  max-width: 460px;
+  letter-spacing: -.04em;
+  text-align: center;
+}
+
+.techs__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.techs__list-item {
+  margin-right: 10px;
+}
+
+.techs__list-item:last-of-type {
+  margin-right: 0;
+}
