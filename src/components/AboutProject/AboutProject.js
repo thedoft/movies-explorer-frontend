@@ -1,9 +1,9 @@
 import React from 'react';
+import Section from '../Section/Section';
 import './AboutProject.css';
 
 const AboutProject = () => (
-  <section className="section about-project" id="about-project">
-    <h2 className="section__title about-project__title">О проекте</h2>
+  <Section sectionClass="about-project" sectionTitleClass="about-project__title" sectionTitle="О проекте" id="about-project">
     <div className="about-project__two-columns">
       <div className="about-project__column">
         <h3 className="about-project__subtitle">Дипломный проект включал 5 этапов</h3>
@@ -24,7 +24,7 @@ const AboutProject = () => (
         <p className="about-project__diagram-caption">Front-end</p>
       </div>
     </div>
-  </section>
+  </Section>
 );
 
 export default AboutProject;

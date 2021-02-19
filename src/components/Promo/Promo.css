@@ -1,6 +1,13 @@
 .promo {
   padding: 75px 70px 50px;
   background: #dddee3 url(../../images/promo.svg) no-repeat right 70px top 75px;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1440px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .promo__title {

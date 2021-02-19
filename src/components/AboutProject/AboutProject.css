@@ -1,5 +1,6 @@
 .about-project {
   padding: 110px 70px;
+  background: #fafafa;
 }
 
 .about-project__title {
@@ -12,6 +13,12 @@
   line-height: 24px;
   letter-spacing: -.04em;
   margin: 0 0 26px;
+}
+
+.about-project__text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
 }
 
 .about-project__two-columns {
