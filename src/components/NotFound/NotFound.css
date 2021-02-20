@@ -1,0 +1,34 @@
+.not-found {
+  padding: 60px 70px;
+  box-sizing: border-box;
+  width: 100%;
+  height: calc(100vh - 246px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.not-found__header {
+  background: #f8f8f8;
+}
+
+.not-found__title {
+  font-weight: 400;
+  font-size: 140px;
+  line-height: 169px;
+  margin: 0 0 5px;
+}
+
+.not-found__subtitle {
+  margin: 0 0 184px;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.not-found__back-link {
+  font-size: 14px;
+  line-height: 17px;
+  color: #3456f3;
+  text-decoration: none;
+}
