@@ -10,7 +10,7 @@ import './Main.css';
 
 const Main = () => (
   <>
-    <Header className="main__header">
+    <Header className="header_section_main">
       <AuthNav />
     </Header>
     <Promo />

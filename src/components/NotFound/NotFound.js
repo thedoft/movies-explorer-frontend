@@ -5,7 +5,7 @@ import './NotFound.css';
 
 const NotFound = () => (
   <>
-    <Header className="not-found__header" />
+    <Header className="header_section_not-found" />
     <section className="not-found">
       <h1 className="not-found__title">404</h1>
       <p className="not-found__subtitle">Страница не найдена</p>

@@ -9,10 +9,6 @@
   justify-content: flex-end;
 }
 
-.not-found__header {
-  background: #f8f8f8;
-}
-
 .not-found__title {
   font-weight: 400;
   font-size: 140px;

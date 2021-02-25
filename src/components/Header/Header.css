@@ -4,7 +4,19 @@
   justify-content: space-between;
   width: 100%;
   max-width: 1440px;
-  height: 74px;
-  padding: 0 70px;
+  padding: 18px 70px;
   box-sizing: border-box;
+}
+
+.header_section_main {
+  background: #dddee3;
+}
+
+.header_section_auth {
+  padding: 70px 0 40px;
+  max-width: 396px;
+}
+
+.header_section_not-found {
+  background: #f8f8f8;
 }
