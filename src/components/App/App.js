@@ -1,8 +1,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Main from '../Main/Main';
-// import Register from '../Register/Register';
-// import Login from '../Login/Login';
+import Register from '../Register/Register';
+import Login from '../Login/Login';
 // import Movies from '../Movies/Movies';
 // import SavedMovies from '../SavedMovies/SavedMovies';
 // import Profile from '../Profile/Profile';
@@ -17,10 +17,10 @@ const App = () => (
         <Main />
       </Route>
       <Route path="/signup">
-        {/* <Register /> */}
+        <Register />
       </Route>
       <Route path="/signin">
-        {/* <Login /> */}
+        <Login />
       </Route>
       <Route path="/movies">
         {/* <Movies /> */}

@@ -1,22 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
+import Form from '../Form/Form';
 import './Auth.css';
 
-const AuthSection = ({
-  children, title, buttonText, caption, path, link,
+const Auth = ({
+  children, title, buttonText, caption, path, linkText,
 }) => (
   <>
     <Header className="header_section_auth" />
     <section className="auth">
       <h1 className="auth__title">{title}</h1>
-      <form className="auth__form">
+      <Form buttonText={buttonText}>
         {children}
-        <button className="auth__submit-button">{buttonText}</button>
-        <p className="auth__caption">{caption} <Link to={path} className="auth__link">{link}</Link></p>
-      </form>
+      </Form>
+      <p className="auth__caption">{caption} <Link to={path} className="auth__link">{linkText}</Link></p>
     </section>
   </>
 );
 
-export default AuthSection;
+export default Auth;
