@@ -6,6 +6,7 @@
   max-width: 1440px;
   padding: 18px 70px;
   box-sizing: border-box;
+  background: #FAFAFA;
 }
 
 .header_section_main {
@@ -15,6 +16,7 @@
 .header_section_auth {
   padding: 70px 0 40px;
   max-width: 396px;
+  background: transparent;
 }
 
 .header_section_not-found {
