@@ -8,7 +8,7 @@ const Auth = ({
   children, title, buttonText, caption, path, linkText,
 }) => (
   <>
-    <Header className="header_section_auth" />
+    <Header className="header header_section_auth" />
     <section className="auth">
       <h1 className="auth__title">{title}</h1>
       <Form buttonText={buttonText}>

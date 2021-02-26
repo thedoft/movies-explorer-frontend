@@ -13,11 +13,40 @@
   min-height: 266px;
 }
 
+.form__fieldset_section_profile {
+  min-height: 0;
+  margin: 0 0 220px;
+}
+
+.form__input-container {
+  margin: 0 0 17px;
+  padding: 0 0 16px;
+  border-bottom: 1px solid #E8E8E8;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  line-height: 13px;
+}
+
+.form__input-container:last-of-type {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
 .form__label {
   font-size: 10px;
   line-height: 12px;
   color: #A0A0A0;
   margin: 0 0 10px;
+}
+
+.form__label_section_profile {
+  font-size: inherit;
+  line-height: inherit;
+  color: #000;
+  margin: 0;
 }
 
 .form__input {
@@ -36,6 +65,21 @@
   margin-bottom: 10px;
 }
 
+.form__input:only-of-type {
+  margin: 0;
+}
+
+.form__input_section_profile {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  text-align: right;
+  flex-basis: 90%;
+  font-size: inherit;
+  line-height: inherit;
+}
+
 .form__error {
   height: 12px;
   font-size: 10px;
@@ -52,4 +96,15 @@
   font-size: 14px;
   line-height: 17px;
   background: #3456F3;
+  cursor: pointer;
+}
+
+.form__submit-button_section_profile {
+  padding: 0;
+  background: transparent;
+  color: #000;
+  font-size: 13px;
+  line-height: 16px;
+  margin: 0 0 16px;
+  min-height: 0;
 }
