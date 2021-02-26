@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
+import Navigation from '../Navigation/Navigation';
 import Form from '../Form/Form';
 import './Profile.css';
 
@@ -10,7 +11,7 @@ const Profile = () => {
   return (
     <>
       <Header>
-        {/* <Navigation /> */}
+        <Navigation />
       </Header>
       <section className="profile">
         <h1 className="profile__title">Привет, {userName}!</h1>
