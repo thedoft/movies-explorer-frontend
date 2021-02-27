@@ -28,13 +28,7 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-}
-
-.techs__list-item {
-  margin-right: 10px;
-}
-
-.techs__list-item:last-of-type {
-  margin-right: 0;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(7, minmax(84px, 90px));
 }
