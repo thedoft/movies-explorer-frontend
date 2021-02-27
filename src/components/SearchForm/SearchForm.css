@@ -33,18 +33,23 @@
 }
 
 .search-form__input {
-  border: none;
+  border: 1px solid transparent;
   background: transparent;
   height: 100%;
   padding: 0 0 0 38px;
   box-sizing: border-box;
   width: 100%;
+  outline: none;
 }
 
 .search-form__input::placeholder {
   font-size: 18px;
   line-height: 20px;
   color: #A0A0A0;
+}
+
+.search-form__input:focus {
+  background: linear-gradient(#3456F3, #3456F3) no-repeat bottom left / calc(100% - 55px) 1px;
 }
 
 .search-form__button {
