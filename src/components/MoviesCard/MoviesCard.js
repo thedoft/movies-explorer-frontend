@@ -1,13 +1,12 @@
 import React from 'react';
 import './MoviesCard.css';
-import image from '../../images/photo.jpg';
 
-const MoviesCard = ({ saved = false }) => (
+const MoviesCard = ({ movie, saved = false }) => (
   <li className="movie">
-    <img className="movie__image" src={image} />
+    <img className="movie__image" src={movie.image} />
     <div className="movie__text-container">
-      <p className="movie__title">Gimme Danger: История Игги и The Stooges</p>
-      <span className="movie__duration">1h 17m</span>
+      <p className="movie__title">{movie.title}</p>
+      <span className="movie__duration">{movie.duration}</span>
     </div>
     {
       saved

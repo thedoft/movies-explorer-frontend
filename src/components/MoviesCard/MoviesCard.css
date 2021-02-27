@@ -72,6 +72,6 @@
   background: #EE3465 url(../../images/saved-icon.svg) no-repeat center;
 }
 
-.movie:hover .movie__button_type_remove {
+.movie__button_type_remove:hover {
   background: #F4F4F4 url(../../images/remove-icon.svg) no-repeat center;
 }
