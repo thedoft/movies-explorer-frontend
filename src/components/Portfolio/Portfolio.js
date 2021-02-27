@@ -1,18 +1,19 @@
 import React from 'react';
 import './Portfolio.css';
+import { staticSite, adaptiveSite, spa } from '../../utils/links';
 
 const Portfolio = () => (
   <div className="portfolio">
     <h3 className="portfolio__title">Портфолио</h3>
     <ul className="portfolio__list">
       <li className="portfolio__list-item">
-        <a className="portfolio__link" href="#">Статичный сайт</a>
+        <a target="_blank" rel="noreferrer noopener" className="portfolio__link" href={staticSite}>Статичный сайт</a>
       </li>
       <li className="portfolio__list-item">
-        <a className="portfolio__link" href="#">Адаптивный сайт</a>
+        <a target="_blank" rel="noreferrer noopener" className="portfolio__link" href={adaptiveSite}>Адаптивный сайт</a>
       </li>
       <li className="portfolio__list-item">
-        <a className="portfolio__link" href="#">Одностраничное приложение</a>
+        <a target="_blank" rel="noreferrer noopener" className="portfolio__link" href={spa}>Одностраничное приложение</a>
       </li>
     </ul>
   </div>

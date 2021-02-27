@@ -1,5 +1,6 @@
 import React from 'react';
 import './Footer.css';
+import { facebook, github, praktikum } from '../../utils/links';
 
 const Footer = () => (
   <footer className="footer">
@@ -8,13 +9,13 @@ const Footer = () => (
       <p className="footer__copyright">&copy; {new Date().getFullYear()}</p>
       <ul className="footer__list">
         <li className="footer__list-item">
-          <a href="#" className="footer__link">Яндекс.Практикум</a>
+          <a target="_blank" rel="noreferrer noopener" href={praktikum} className="footer__link">Яндекс.Практикум</a>
         </li>
         <li className="footer__list-item">
-          <a href="#" className="footer__link">Github</a>
+          <a target="_blank" rel="noreferrer noopener" href={github} className="footer__link">Github</a>
         </li>
         <li className="footer__list-item">
-          <a href="#" className="footer__link">Facebook</a>
+          <a target="_blank" rel="noreferrer noopener" href={facebook} className="footer__link">Facebook</a>
         </li>
       </ul>
     </div>

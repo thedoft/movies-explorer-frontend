@@ -2,6 +2,7 @@ import React from 'react';
 import Section from '../Section/Section';
 import './AboutMe.css';
 import photo from '../../images/photo.jpg';
+import { facebook, github } from '../../utils/links';
 
 const AboutMe = ({ children }) => (
   <Section sectionClass="about-me" sectionTitleClass="about-me__title" sectionTitle="Студент">
@@ -18,10 +19,10 @@ const AboutMe = ({ children }) => (
         </p>
         <ul className="about-me__list">
           <li className="about-me__list-item">
-            <a className="about-me__link" href="#">Facebook</a>
+            <a target="_blank" rel="noreferrer noopener" className="about-me__link" href={facebook}>Facebook</a>
           </li>
           <li className="about-me__list-item">
-            <a className="about-me__link" href="#">Github</a>
+            <a target="_blank" rel="noreferrer noopener" className="about-me__link" href={github}>Github</a>
           </li>
         </ul>
       </div>
