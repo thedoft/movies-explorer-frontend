@@ -9,6 +9,12 @@
   margin-right: 30px;
   color: #000;
   text-decoration: none;
+  transition: opacity .25s ease-in-out;
+}
+
+.auth-nav__link:hover {
+  opacity: .5;
+  transition: opacity .25s ease-in-out;
 }
 
 .auth-nav__button {
@@ -18,8 +24,12 @@
   width: 76px;
   border-radius: 3px;
   color: #fff;
+  cursor: pointer;
+  transition: box-shadow .25s ease-in-out, opacity .25s ease-in-out;
 }
 
 .auth-nav__button:hover {
-  cursor: pointer;
+  box-shadow: #000 0 0 3px inset;
+  opacity: .9;
+  transition: box-shadow .25s ease-in-out, opacity .25s ease-in-out;
 }

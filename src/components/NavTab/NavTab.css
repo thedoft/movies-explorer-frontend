@@ -7,8 +7,11 @@
   font-size: 12px;
   line-height: 16px;
   background: transparent;
+  cursor: pointer;
+  transition: box-shadow .25s ease-in-out;
 }
 
 .nav-tab:hover {
-  cursor: pointer;
+  box-shadow: 0 0 3px inset #000;
+  transition: box-shadow .25s ease-in-out;
 }

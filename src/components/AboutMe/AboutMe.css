@@ -70,6 +70,12 @@
   line-height: 17px;
   color: #000;
   text-decoration: none;
+  transition: opacity .5s ease-in-out;
+}
+
+.about-me__link:hover {
+  opacity: .6;
+  transition: opacity .5s ease-in-out;
 }
 
 .about-me__image {
@@ -77,4 +83,5 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
+  box-shadow: 0 0 3px #000;
 }

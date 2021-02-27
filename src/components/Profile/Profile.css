@@ -20,4 +20,10 @@
   font-size: 13px;
   line-height: 16px;
   text-decoration: none;
+  transition: opacity .5s ease-in-out;
+}
+
+.profile__exit:hover {
+  opacity: .5;
+  transition: opacity .5s ease-in-out;
 }
