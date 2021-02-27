@@ -51,7 +51,6 @@
 
 .form__input {
   margin: 0 0 20px;
-  padding: 0;
   border: none;
   border-radius: 8px;
   background: #F4F4F4;
@@ -78,6 +77,10 @@
   flex-basis: 90%;
   font-size: inherit;
   line-height: inherit;
+}
+
+.form__input_with-error {
+  color: #EE3465;
 }
 
 .form__error {

@@ -4,6 +4,9 @@ import Header from '../Header/Header';
 import Navigation from '../Navigation/Navigation';
 import Form from '../Form/Form';
 import './Profile.css';
+import Preloader from '../Preloader/Preloader';
+
+const isLoading = false;
 
 const Profile = () => {
   const userName = 'Игорь';
@@ -29,6 +32,7 @@ const Profile = () => {
         </Form>
         <Link to="/signin" className="profile__exit">Выйти из аккаунта</Link>
       </section>
+      {isLoading && <Preloader />}
     </>
   );
 };
