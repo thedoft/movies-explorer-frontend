@@ -8,7 +8,7 @@ const MoviesCard = ({ movie, isRemovable = false }) => {
 
   return (
     <li className="movie">
-      <img className="movie__image" src={image} />
+      <img className="movie__image" src={image} alt={title} />
       <div className="movie__text-container">
         <p className="movie__title">{title}</p>
         <span className="movie__duration">{duration}</span>

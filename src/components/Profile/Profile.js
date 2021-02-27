@@ -22,11 +22,11 @@ const Profile = () => {
           <fieldset className="form__fieldset form__fieldset_section_profile">
             <div className="form__input-container">
               <label className="form__label form__label_section_profile" htmlFor="name">Имя</label>
-              <input className="form__input form__input_section_profile" id="name" defaultValue="Игорь" />
+              <input className="form__input form__input_section_profile" id="name" defaultValue="Игорь" required />
             </div>
             <div className="form__input-container">
               <label className="form__label form__label_section_profile" htmlFor="email">Почта</label>
-              <input type="email" className="form__input form__input_section_profile" id="email" defaultValue="example@ya.ru" />
+              <input type="email" className="form__input form__input_section_profile" id="email" defaultValue="example@ya.ru" required />
             </div>
           </fieldset>
         </Form>

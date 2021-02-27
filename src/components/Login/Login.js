@@ -15,9 +15,9 @@ const Login = () => (
     >
       <fieldset className="form__fieldset">
         <label className="form__label" htmlFor="email">E-mail</label>
-        <input type="email" className="form__input" id="email" />
+        <input type="email" className="form__input" id="email" required />
         <label className="form__label" htmlFor="password">Пароль</label>
-        <input type="password" className="form__input" id="password" />
+        <input type="password" className="form__input" id="password" required />
       </fieldset>
     </Auth>
     {isLoading && <Preloader />}

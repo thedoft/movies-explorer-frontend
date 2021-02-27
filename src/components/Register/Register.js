@@ -15,11 +15,11 @@ const Register = () => (
     >
       <fieldset className="form__fieldset">
         <label className="form__label" htmlFor="name">Имя</label>
-        <input className="form__input" id="name" />
+        <input className="form__input" id="name" required minLength={2} maxLength={30} />
         <label className="form__label" htmlFor="email">E-mail</label>
-        <input type="email" className="form__input" id="email" />
+        <input type="email" className="form__input" id="email" required />
         <label className="form__label" htmlFor="password">Пароль</label>
-        <input type="password" className="form__input form__input_with-error" id="password" />
+        <input type="password" className="form__input form__input_with-error" id="password" required />
         <span className="form__error">Что-то пошло не так</span>
       </fieldset>
     </Auth>
