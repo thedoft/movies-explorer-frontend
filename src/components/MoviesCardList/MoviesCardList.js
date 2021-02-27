@@ -1,16 +1,17 @@
 import React from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
-import defaultMovies from '../../utils/defaultMovies';
 
-const MoviesCardList = () => (
+const MoviesCardList = ({ movies, isRemovable }) => (
   <section className="movies">
     <ul className="movies__list">
-      {defaultMovies.map((movie, index) => (
-        <MoviesCard movie={movie} key={index} saved={index % 2 !== 0} />
+      {movies.map((movie, index) => (
+        <MoviesCard movie={movie} key={index} isRemovable={isRemovable} />
       ))}
     </ul>
-    <button className="movies__more-button">Еще</button>
+    {
+      movies.length > 6 && <button className="movies__more-button">Еще</button>
+    }
   </section>
 );
 
