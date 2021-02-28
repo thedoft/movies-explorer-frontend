@@ -23,12 +23,13 @@
 
 .about-project__two-columns {
   display: flex;
+  justify-content: space-between;
   width: 100%;
   margin-bottom: 110px;
 }
 
 .about-project__column {
-  width: 50%;
+  width: 47%;
 }
 
 .about-project__left-column {
