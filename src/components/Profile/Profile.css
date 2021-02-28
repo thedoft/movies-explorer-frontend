@@ -27,3 +27,13 @@
   opacity: .5;
   transition: opacity .5s ease-in-out;
 }
+
+@media screen and (max-width: 768px) {
+  .profile {
+    padding: 236px 0 269px;
+  }
+
+  .profile__title {
+    margin-bottom: 96px;
+  }
+}

@@ -3,15 +3,15 @@ import Section from '../Section/Section';
 import './AboutProject.css';
 
 const AboutProject = () => (
-  <Section sectionClass="about-project" sectionTitleClass="about-project__title" sectionTitle="О проекте" id="about-project">
+  <Section mod="about-project" sectionTitleMod="about-project__title" sectionTitle="О проекте" id="about-project">
     <div className="about-project__two-columns">
       <div className="about-project__column">
         <h3 className="about-project__subtitle">Дипломный проект включал 5 этапов</h3>
-        <p className="section__text about-project__text">Составление плана, работу над бэкендом, вёрстку, добавление функциональности и финальные доработки.</p>
+        <p className="about-project__text">Составление плана, работу над бэкендом, вёрстку, добавление функциональности и финальные доработки.</p>
       </div>
       <div className="about-project__column">
         <h3 className="about-project__subtitle">На выполнение диплома ушло 5 недель</h3>
-        <p className="section__text about-project__text">У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было соблюдать, чтобы успешно защититься.</p>
+        <p className="about-project__text">У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было соблюдать, чтобы успешно защититься.</p>
       </div>
     </div>
     <div className="about-project__two-columns">

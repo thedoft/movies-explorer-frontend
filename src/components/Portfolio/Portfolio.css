@@ -44,3 +44,9 @@
   opacity: .5;
   transition: opacity .5s ease-in-out;
 }
+
+@media screen and (max-width: 768px) {
+  .portfolio__link {
+    font-size: 28px;
+  }
+}

@@ -5,7 +5,7 @@ import photo from '../../images/photo.jpg';
 import { facebook, github } from '../../utils/links';
 
 const AboutMe = ({ children }) => (
-  <Section sectionClass="about-me" sectionTitleClass="about-me__title" sectionTitle="Студент">
+  <Section mod="about-me" sectionTitleMod="about-me__title" sectionTitle="Студент">
     <div className="about-me__two-columns">
       <div className="about-me__left-column">
         <div className="about-me__student-info-container">

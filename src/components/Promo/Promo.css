@@ -38,6 +38,30 @@
   .promo__title {
     max-width: 440px;
     font-size: 40px;
-    
+    line-height: 50px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .promo {
+    padding: 492px 30px 66px;
+    background-position: top 140px center;
+    align-items: center;
+  }
+
+  .promo__title {
+    max-width: 680px;
+    text-align: center;
+    margin: 0 0 22px;
+  }
+
+  .promo__text {
+    max-width: 260px;
+    text-align: center;
+    margin: 0 0 92px;
+  }
+
+  .promo__nav-tab {
+    margin-bottom: 10px;
   }
 }

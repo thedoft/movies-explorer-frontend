@@ -131,3 +131,9 @@
   margin: 0 0 16px;
   min-height: 0;
 }
+
+@media screen and (max-width: 768px) {
+  .form__fieldset_section_profile {
+    margin-bottom: 210px;
+  }
+}

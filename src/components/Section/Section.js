@@ -2,10 +2,10 @@ import React from 'react';
 import './Section.css';
 
 const Section = ({
-  children, sectionClass, sectionTitleClass, sectionTitle, id,
+  children, mod, sectionTitleMod, sectionTitle, id,
 }) => (
-  <section className={`section ${sectionClass}`} id={id}>
-    <h2 className={`section__title ${sectionTitleClass}`}>{sectionTitle}</h2>
+  <section className={`section ${mod}`} id={id}>
+    <h2 className={`section__title ${sectionTitleMod}`}>{sectionTitle}</h2>
     {children}
   </section>
 );

@@ -27,4 +27,18 @@
   .header {
     padding: 18px 50px;
   }
+
+  .header_section_auth {
+  padding: 70px 0 40px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 18px 30px;
+  }
+
+  .header_section_auth {
+    padding: 232px 0 40px;
+  }
 }

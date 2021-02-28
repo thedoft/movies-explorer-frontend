@@ -34,3 +34,19 @@
   box-shadow: #000 0 0 3px inset;
   transition: box-shadow .25s ease-in-out;
 }
+
+@media screen and (max-width: 1024px) {
+  .movies {
+    padding: 70px 50px 80px;
+  }
+
+  .movies__list {
+    grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .movies {
+    padding: 70px 30px 80px;
+  }
+}

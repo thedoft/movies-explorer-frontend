@@ -14,7 +14,7 @@ const isLoggedIn = false;
 
 const Main = () => (
   <>
-    <Header className="header_section_main">
+    <Header mod="header_section_main">
       {!isLoggedIn ? <AuthNav /> : <Navigation />}
     </Header>
     <Promo />
