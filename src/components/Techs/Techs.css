@@ -28,7 +28,20 @@
   list-style: none;
   margin: 0;
   padding: 0;
+  width: 100%;
   display: grid;
   gap: 10px;
-  grid-template-columns: repeat(7, minmax(84px, 90px));
+  grid-template-columns: repeat(auto-fit, 90px);
+  justify-content: center;
+}
+
+@media screen and (max-width: 1024px) {
+  .techs {
+    padding: 100px 50px;
+  }
+
+  .techs__list {
+    grid-template-columns: repeat(auto-fit, 84px);
+    width: 97%;
+  }
 }

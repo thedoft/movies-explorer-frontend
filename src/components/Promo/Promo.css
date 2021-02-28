@@ -1,7 +1,6 @@
 .promo {
   padding: 75px 70px 50px;
   background: #dddee3 url(../../images/promo.svg) no-repeat right 70px top 75px;
-  align-items: flex-start;
   width: 100%;
   max-width: 1440px;
   box-sizing: border-box;
@@ -28,4 +27,17 @@
 
 .promo__nav-tab {
   margin-bottom: 25px;
+}
+
+@media screen and (max-width: 1024px) {
+  .promo {
+    padding: 75px 50px 50px;
+    background-position: top 75px right 50px;
+  }
+
+  .promo__title {
+    max-width: 440px;
+    font-size: 40px;
+    
+  }
 }
