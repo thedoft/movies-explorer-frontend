@@ -7,6 +7,7 @@ import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import NotFound from '../NotFound/NotFound';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import './App.css';
 
 const App = () => (
@@ -34,6 +35,8 @@ const App = () => (
         <NotFound />
       </Route>
     </Switch>
+
+    <InfoTooltip />
   </>
 );
 
