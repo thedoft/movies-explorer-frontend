@@ -1,10 +1,12 @@
 import React from 'react';
-import Auth from '../Auth/Auth';
+import Header from '../Header/Header';
+import Section from '../Section/Section';
 import Form from '../Form/Form';
 
 const Register = () => (
   <>
-    <Auth title="Добро пожаловать!">
+    <Header mod="header_section_auth" />
+    <Section mod="section_type_auth" sectionTitle="Добро пожаловать!" sectionTitleMod="section__title_type_auth">
       <Form
         buttonText="Зарегистрироваться"
         caption="Уже зарегистрированы? "
@@ -21,7 +23,7 @@ const Register = () => (
           <span className="form__error">Что-то пошло не так</span>
         </fieldset>
       </Form>
-    </Auth>
+    </Section>
   </>
 );
 

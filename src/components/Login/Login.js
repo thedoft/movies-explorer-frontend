@@ -1,10 +1,12 @@
 import React from 'react';
-import Auth from '../Auth/Auth';
+import Header from '../Header/Header';
+import Section from '../Section/Section';
 import Form from '../Form/Form';
 
 const Login = () => (
   <>
-    <Auth title="Рады видеть!">
+    <Header mod="header_section_auth" />
+    <Section mod="section_type_auth" sectionTitle="Рады видеть!" sectionTitleMod="section__title_type_auth">
       <Form
         buttonText="Войти"
         caption="Еще не зарегистрированы? "
@@ -18,7 +20,7 @@ const Login = () => (
           <input type="password" className="form__input" id="password" required />
         </fieldset>
       </Form>
-    </Auth>
+    </Section>
   </>
 );
 
