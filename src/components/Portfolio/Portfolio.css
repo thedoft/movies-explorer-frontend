@@ -50,3 +50,14 @@
     font-size: 28px;
   }
 }
+
+@media screen and (max-width: 640px) {
+  .portfolio__title {
+    font-size: 14px;
+  }
+
+  .portfolio__link {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}

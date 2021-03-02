@@ -1,8 +1,5 @@
 import React from 'react';
 import Auth from '../Auth/Auth';
-import Preloader from '../Preloader/Preloader';
-
-const isLoading = false;
 
 const Register = () => (
   <>
@@ -23,7 +20,6 @@ const Register = () => (
         <span className="form__error">Что-то пошло не так</span>
       </fieldset>
     </Auth>
-    {isLoading && <Preloader />}
   </>
 );
 

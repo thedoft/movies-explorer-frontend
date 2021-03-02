@@ -17,6 +17,7 @@
   padding: 70px 0 40px;
   max-width: 396px;
   background: transparent;
+  justify-content: flex-start;
 }
 
 .header_section_not-found {
@@ -40,5 +41,16 @@
 
   .header_section_auth {
     padding: 232px 0 40px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .header {
+    padding: 18px 14px;
+  }
+
+  .header_section_auth {
+    padding: 56px 0 50px;
+    justify-content: center;
   }
 }

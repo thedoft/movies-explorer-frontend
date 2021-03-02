@@ -47,7 +47,7 @@
 
 @media screen and (max-width: 768px) {
   .techs__title {
-    margin-bottom:  80px;
+    margin-bottom: 80px;
   }
 
   .techs__subtitle {
@@ -58,5 +58,31 @@
     font-size: 12px;
     line-height: 18px;
     margin-bottom: 83px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .techs {
+    padding: 70px 18px;
+  }
+
+  .techs__title {
+    margin-bottom: 60px;
+  }
+
+  .techs__subtitle {
+    font-size: 30px;
+    line-height: 36px;
+    margin-bottom: 24px;
+  }
+
+  .techs__text {
+    font-size: 11px;
+    line-height: 16px;
+    margin-bottom: 50px;
+  }
+
+  .techs__list {
+    width: 90%;
   }
 }

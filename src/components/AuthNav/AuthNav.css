@@ -38,3 +38,15 @@
   opacity: .9;
   transition: box-shadow .25s ease-in-out, opacity .25s ease-in-out;
 }
+
+@media screen and (max-width: 640px) {
+  .auth-nav__link {
+    font-size: 10px;
+    margin-right: 14px;
+  }
+
+  .auth-nav__button {
+    width: 54px;
+    height: 26px;
+  }
+}

@@ -4,6 +4,7 @@
   flex-direction: column;
   align-items: center;
   width: 410px;
+  box-sizing: border-box;
 }
 
 .profile__title {
@@ -31,9 +32,29 @@
 @media screen and (max-width: 768px) {
   .profile {
     padding: 236px 0 269px;
+    height: calc(100vh - 74px);
   }
 
   .profile__title {
     margin-bottom: 96px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .profile {
+    padding: 70px 10px 40px;
+  }
+
+  .profile__title {
+    margin-bottom: 80px;
+  }
+
+  
+}
+
+@media screen and (max-width: 425px) {
+  .profile {
+    padding: 70px 30px 40px;
+    width: 100%;
   }
 }

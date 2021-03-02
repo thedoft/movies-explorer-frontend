@@ -65,3 +65,27 @@
     margin-bottom: 10px;
   }
 }
+
+@media screen and (max-width: 640px) {
+  .promo {
+    padding: 320px 10px 30px;
+    background-position: top 70px center;
+    background-size: 210px 206px;
+  }
+
+  .promo__title {
+    font-size: 30px;
+    line-height: 38px;
+    letter-spacing: -.04em;
+    max-width: 520px;
+    margin: 0 0 24px;
+  }
+
+  .promo__text {
+    margin: 0 0 80px;
+  }
+
+  .promo__nav-tab {
+    margin-bottom: 0;
+  }
+}

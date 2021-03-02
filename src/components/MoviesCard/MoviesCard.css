@@ -26,7 +26,6 @@
   font-size: 13px;
   line-height: 16px;
   max-width: 250px;
-  height: 32px;
 }
 
 .movie__duration {
@@ -82,4 +81,26 @@
 
 .movie:hover .movie__button_type_remove {
   visibility: visible;
+}
+
+@media screen and (max-width: 768px) {
+  .movie__image {
+    height: 190px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .movie__image {
+    height: 168px;
+    margin-bottom: 16px;
+  }
+
+  .movie__text-container {
+    padding: 0;
+  }
+
+  .movie__title {
+    font-size: 12px;
+    line-height: 15px;
+  }
 }
