@@ -1,12 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
 import Navigation from '../Navigation/Navigation';
 import Form from '../Form/Form';
 import './Profile.css';
-import Preloader from '../Preloader/Preloader';
-
-const isLoading = false;
 
 const Profile = () => {
   const userName = 'Игорь';
@@ -18,7 +14,13 @@ const Profile = () => {
       </Header>
       <section className="profile">
         <h1 className="profile__title">Привет, {userName}!</h1>
-        <Form buttonText="Редактировать" submitButtonMod="form__submit-button_section_profile">
+        <Form
+          buttonText="Редактировать"
+          submitButtonMod="form__submit-button_section_profile"
+          linkPath="/signin"
+          linkText="Выйти из аккаунта"
+          linkMod="form__link_type_exit"
+        >
           <fieldset className="form__fieldset form__fieldset_section_profile">
             <div className="form__input-container">
               <label className="form__label form__label_section_profile" htmlFor="name">Имя</label>
@@ -30,9 +32,7 @@ const Profile = () => {
             </div>
           </fieldset>
         </Form>
-        <Link to="/signin" className="profile__exit">Выйти из аккаунта</Link>
       </section>
-      {isLoading && <Preloader />}
     </>
   );
 };
