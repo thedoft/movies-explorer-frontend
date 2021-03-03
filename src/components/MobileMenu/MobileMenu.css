@@ -78,10 +78,11 @@
 }
 
 .mobile-menu__nav {
-  width: 67.7%;
+  width: 100%;
+  max-width: 520px;
   height: 100%;
   background: #fafafa;
-  padding: 159px 90px 92px;
+  padding: 159px 0 92px;
   box-sizing: border-box;
   flex-direction: column;
   justify-content: space-between;
@@ -101,10 +102,17 @@
   font-size: 18px;
   line-height: 22px;
   padding: 0 0 4px;
+  text-align: center;
   box-sizing: border-box;
   display: inline-block;
 }
 
 .mobile-menu__nav-link_active {
   border-bottom: #000 2px solid;
+}
+
+@media screen and (max-width: 425px) {
+  .mobile-menu__nav {
+    padding: 144px 0 48px;
+  }
 }

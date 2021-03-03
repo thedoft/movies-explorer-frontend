@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../Header/Header';
 import Navigation from '../Navigation/Navigation';
+import Section from '../Section/Section';
 import Form from '../Form/Form';
 import './Profile.css';
 
@@ -12,8 +13,7 @@ const Profile = () => {
       <Header>
         <Navigation />
       </Header>
-      <section className="profile">
-        <h1 className="profile__title">Привет, {userName}!</h1>
+      <Section mod="profile" sectionTitleMod="profile__title" sectionTitle={`Привет, ${userName}!`}>
         <Form
           buttonText="Редактировать"
           submitButtonMod="form__submit-button_section_profile"
@@ -32,7 +32,7 @@ const Profile = () => {
             </div>
           </fieldset>
         </Form>
-      </section>
+      </Section>
     </>
   );
 };
