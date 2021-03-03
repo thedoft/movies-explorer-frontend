@@ -1,0 +1,118 @@
+.mobile-menu {
+  display: flex;
+  z-index: 1;
+}
+
+.mobile-menu__label {
+  width: 28px;
+  height: 23px;
+  position: relative;
+  cursor: pointer;
+  z-index: 2;
+  transition: opacity .5s ease-in-out;
+}
+
+.mobile-menu__label:hover {
+  opacity: .5;
+  transition: opacity .5s ease-in-out;
+}
+
+.mobile-menu__checkbox {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.mobile-menu__button,
+.mobile-menu__button::before,
+.mobile-menu__button::after {
+  display: block;
+  position: absolute;
+  top: 10px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: #000;
+  transition-duration: .4s
+}
+
+.mobile-menu__button::before {
+  content: '';
+  top: -7px;
+}
+.mobile-menu__button::after {
+  content: '';
+  top: 7px;
+}
+
+.mobile-menu__checkbox:checked ~ .mobile-menu__label > .mobile-menu__button {
+  transform: rotate(45deg);
+}
+.mobile-menu__checkbox:checked ~ .mobile-menu__label > .mobile-menu__button::before {
+  top: 0;
+  transform: rotate(0);
+}
+.mobile-menu__checkbox:checked ~ .mobile-menu__label > .mobile-menu__button::after {
+  top: 0;
+  transform: rotate(90deg);
+}
+
+.mobile-menu__nav-container {
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, .3);
+  display: flex;
+  justify-content: flex-end;
+  transition-duration: .4s
+}
+
+.mobile-menu__checkbox:checked ~ .mobile-menu__nav-container {
+  visibility: visible;
+  right: 0;
+}
+
+.mobile-menu__nav {
+  width: 100%;
+  max-width: 520px;
+  height: 100%;
+  background: #fafafa;
+  padding: 159px 0 92px;
+  box-sizing: border-box;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.mobile-menu__nav-list {
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+}
+
+.mobile-menu__nav-list-item {
+  margin: 0 0 22px;
+}
+
+.mobile-menu__nav-link {
+  font-size: 18px;
+  line-height: 22px;
+  padding: 0 0 4px;
+  text-align: center;
+  box-sizing: border-box;
+  display: inline-block;
+}
+
+.mobile-menu__nav-link_active {
+  border-bottom: #000 2px solid;
+}
+
+@media screen and (max-width: 425px) {
+  .mobile-menu__nav {
+    padding: 144px 0 48px;
+  }
+}
