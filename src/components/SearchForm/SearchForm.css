@@ -23,7 +23,7 @@
   display: flex;
 }
 
-.search-form__label {
+.search-form__input-container {
   border-right: 1px solid #CBCBCB;
   padding: 0 19px;
   box-sizing: border-box;
@@ -158,7 +158,7 @@
     box-shadow: none;
   }
 
-  .search-form__label {
+  .search-form__input-container {
     height: 72px;
     background: #fff;
     border: none;
