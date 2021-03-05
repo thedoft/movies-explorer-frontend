@@ -1,30 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../Header/Header';
 import Section from '../Section/Section';
 import Form from '../Form/Form';
 
-const Register = () => (
-  <>
-    <Header mod="header_section_auth" />
-    <Section mod="section_type_auth" sectionTitle="Добро пожаловать!" sectionTitleMod="section__title_type_auth">
-      <Form
-        buttonText="Зарегистрироваться"
-        caption="Уже зарегистрированы? "
-        linkPath="/signin"
-        linkText="Войти"
-      >
-        <fieldset className="form__fieldset">
-          <label className="form__label" htmlFor="name">Имя</label>
-          <input className="form__input" id="name" required minLength={2} maxLength={30} defaultValue="Игорь" />
-          <label className="form__label" htmlFor="email">E-mail</label>
-          <input type="email" className="form__input" id="email" required defaultValue="email@ya.ru" />
-          <label className="form__label" htmlFor="password">Пароль</label>
-          <input type="password" className="form__input form__input_with-error" id="password" required defaultValue="password" />
-          <span className="form__error">Что-то пошло не так</span>
-        </fieldset>
-      </Form>
-    </Section>
-  </>
-);
+const Register = ({ onRegister }) => {
+  const [userData, setUserData] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
+
+  const handleChange = (evt) => {
+    setUserData({
+      ...userData,
+      [evt.target.name]: evt.target.value,
+    });
+  };
+
+  return (
+    <>
+      <Header mod="header_section_auth" />
+      <Section mod="section_type_auth" sectionTitle="Добро пожаловать!" sectionTitleMod="section__title_type_auth">
+        <Form
+          buttonText="Зарегистрироваться"
+          caption="Уже зарегистрированы? "
+          linkPath="/signin"
+          linkText="Войти"
+          data={userData}
+          onSubmit={onRegister}
+        >
+          <fieldset className="form__fieldset">
+            <label className="form__label" htmlFor="name">Имя</label>
+            <input name="name" value={userData.name} onChange={handleChange} className="form__input" id="name" required minLength={2} maxLength={30} />
+            <label className="form__label" htmlFor="email">E-mail</label>
+            <input name="email" value={userData.email} onChange={handleChange} type="email" className="form__input" id="email" required />
+            <label className="form__label" htmlFor="password">Пароль</label>
+            <input name="password" value={userData.password} onChange={handleChange} type="password" className="form__input" id="password" required />
+            <span className="form__error"></span>
+          </fieldset>
+        </Form>
+      </Section>
+    </>
+  );
+};
 
 export default Register;

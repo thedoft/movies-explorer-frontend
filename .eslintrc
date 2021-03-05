@@ -2,7 +2,8 @@
   "extends": ["airbnb-base", "airbnb/hooks", "plugin:react/recommended"],
   "rules": {
     "no-underscore-dangle": "off",
-    "react/prop-types": 0
+    "react/prop-types": 0,
+    "no-unused-vars": "off"
   },
   "env": {
     "browser": true
