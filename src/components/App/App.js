@@ -22,7 +22,7 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState({});
 
   const handleRegister = async ({ name, email, password }) => {
     try {
@@ -31,6 +31,18 @@ const App = () => {
       if (user) {
         history.push('/signin');
       }
+    } catch (err) {
+      setError(err);
+      setIsInfoTooltipOpen(true);
+    }
+  };
+
+  const handleLogin = async ({ email, password }) => {
+    try {
+      const user = await api.login({ email, password });
+
+      setCurrentUser(user);
+      setIsLoggedIn(true);
     } catch (err) {
       setError(err);
       setIsInfoTooltipOpen(true);
@@ -46,7 +58,7 @@ const App = () => {
           {!isLoggedIn ? <Register onRegister={handleRegister} /> : <Redirect to="/movies" />}
         </Route>
         <Route path="/signin">
-          {!isLoggedIn ? <Login /> : <Redirect to="/movies" />}
+          {!isLoggedIn ? <Login onLogin={handleLogin} /> : <Redirect to="/movies" />}
         </Route>
 
         <ProtectedRoute isLoggedIn={isLoggedIn} component={Movies} path="/movies" />
