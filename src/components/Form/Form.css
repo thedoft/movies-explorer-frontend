@@ -62,7 +62,6 @@
 }
 
 .form__input:focus {
-  border: 1px solid #3456F3;
   box-shadow: 0 0 0 1px #3456F3;
 }
 

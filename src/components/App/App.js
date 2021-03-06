@@ -78,7 +78,11 @@ const App = () => {
         <Route path='*' component={NotFound} />
       </Switch>
 
-      <InfoTooltip error={error} isOpen={isInfoTooltipOpen} />
+      <InfoTooltip
+        error={error}
+        isOpen={isInfoTooltipOpen}
+        setIsOpen={setIsInfoTooltipOpen}
+      />
     </CurrentUserContext.Provider>
   );
 };
