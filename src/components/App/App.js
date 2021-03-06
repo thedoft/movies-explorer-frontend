@@ -26,11 +26,9 @@ const App = () => {
 
   const handleRegister = async ({ name, email, password }) => {
     try {
-      const user = await api.register({ name, email, password });
+      await api.register({ name, email, password });
 
-      if (user) {
-        history.push('/signin');
-      }
+      history.push('/signin');
     } catch (err) {
       setError(err);
       setIsInfoTooltipOpen(true);
@@ -43,6 +41,18 @@ const App = () => {
 
       setCurrentUser(user);
       setIsLoggedIn(true);
+    } catch (err) {
+      setError(err);
+      setIsInfoTooltipOpen(true);
+    }
+  };
+
+  const handleSignout = async () => {
+    try {
+      await api.logout();
+
+      setIsLoggedIn(false);
+      setCurrentUser({});
     } catch (err) {
       setError(err);
       setIsInfoTooltipOpen(true);
@@ -63,7 +73,7 @@ const App = () => {
 
         <ProtectedRoute isLoggedIn={isLoggedIn} component={Movies} path="/movies" />
         <ProtectedRoute isLoggedIn={isLoggedIn} component={SavedMovies} path="/saved-movies" />
-        <ProtectedRoute isLoggedIn={isLoggedIn} component={Profile} path="/profile" />
+        <ProtectedRoute isLoggedIn={isLoggedIn} component={Profile} path="/profile" onSignout={handleSignout} />
 
         <Route path='*' component={NotFound} />
       </Switch>

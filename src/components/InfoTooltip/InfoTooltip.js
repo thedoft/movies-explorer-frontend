@@ -7,7 +7,7 @@ const InfoTooltip = ({ error, isOpen }) => (
     <div className="popup__container">
       <img className="popup__image" src={errorImg} alt="Ошибка при совершении запроса" />
       <h2 className="popup__title">Что-то пошло не так...</h2>
-      <p className="popup__text">Ошибка {error.status}: {error.message}</p>
+      <p className="popup__text">{error.message}</p>
       <button className="popup__close-button" />
     </div>
   </div>

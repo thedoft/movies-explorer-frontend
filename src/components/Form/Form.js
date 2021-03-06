@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import './Form.css';
 
 const Form = ({
-  children, submitButtonMod = '', buttonText, caption = '', linkPath, linkText, linkMod = '', data, onSubmit,
+  children, submitButtonMod = '', buttonText, caption = '',
+  linkPath, linkText, linkMod = '', onLinkClick = () => {},
+  data, onSubmit,
 }) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -16,7 +18,7 @@ const Form = ({
       <button className={`form__submit-button ${submitButtonMod}`}>{buttonText}</button>
       <p className="form__caption">
         {caption}
-        <Link to={linkPath} className={`form__link ${linkMod}`}>{linkText}</Link>
+        <Link to={linkPath} onClick={onLinkClick} className={`form__link ${linkMod}`}>{linkText}</Link>
       </p>
     </form>
   );

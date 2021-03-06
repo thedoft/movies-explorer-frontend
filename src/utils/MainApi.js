@@ -9,3 +9,7 @@ export const register = ({ name, email, password }) => fetchApi({
 export const login = ({ email, password }) => fetchApi({
   url: BASE_URL, path: 'signin', method: 'POST', body: { email, password },
 });
+
+export const logout = () => fetchApi({
+  url: BASE_URL, path: 'signout',
+});
