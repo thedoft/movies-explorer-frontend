@@ -31,11 +31,11 @@ const Register = ({ onRegister }) => {
         >
           <fieldset className="form__fieldset">
             <label className="form__label" htmlFor="name">Имя</label>
-            <input name="name" value={userData.name} onChange={handleChange} className="form__input" id="name" required minLength={2} maxLength={30} />
+            <input name="name" value={userData.name} onChange={handleChange} className="form__input" id="name" required minLength={2} maxLength={30} autoComplete="current-name" />
             <label className="form__label" htmlFor="email">E-mail</label>
-            <input name="email" value={userData.email} onChange={handleChange} type="email" className="form__input" id="email" required />
+            <input name="email" value={userData.email} onChange={handleChange} type="email" className="form__input" id="email" required autoComplete="current-email" />
             <label className="form__label" htmlFor="password">Пароль</label>
-            <input name="password" value={userData.password} onChange={handleChange} type="password" className="form__input" id="password" required />
+            <input name="password" value={userData.password} onChange={handleChange} type="password" className="form__input" id="password" required autoComplete="current-password" />
             <span className="form__error"></span>
           </fieldset>
         </Form>

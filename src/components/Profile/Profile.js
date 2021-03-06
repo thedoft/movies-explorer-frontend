@@ -26,11 +26,11 @@ const Profile = ({ onSignout }) => {
           <fieldset className="form__fieldset form__fieldset_section_profile">
             <div className="form__input-container">
               <label className="form__label form__label_section_profile" htmlFor="name">Имя</label>
-              <input className="form__input form__input_section_profile" id="name" defaultValue="Игорь" required />
+              <input className="form__input form__input_section_profile" id="name" required autoComplete="current-name" />
             </div>
             <div className="form__input-container">
               <label className="form__label form__label_section_profile" htmlFor="email">Почта</label>
-              <input type="email" className="form__input form__input_section_profile" id="email" defaultValue="example@ya.ru" required />
+              <input type="email" className="form__input form__input_section_profile" id="email" required autoComplete="current-email" />
             </div>
           </fieldset>
         </Form>
