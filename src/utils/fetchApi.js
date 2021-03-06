@@ -11,7 +11,8 @@ const fetchApi = async ({
   });
 
   if (!res.ok) {
-    return Promise.reject(new Error(`Ошибка ${res.status}`));
+    const error = await res.json();
+    return Promise.reject(new Error(`${error.message}`));
   }
 
   return res.json();
