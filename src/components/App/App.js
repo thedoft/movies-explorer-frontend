@@ -58,6 +58,10 @@ const App = () => {
     }
   };
 
+  const handleUpdateProfile = (values) => {
+
+  };
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Switch>
@@ -70,9 +74,15 @@ const App = () => {
           {!isLoggedIn ? <Login onLogin={handleLogin} /> : <Redirect to="/movies" />}
         </Route>
 
-        <ProtectedRoute isLoggedIn={isLoggedIn} component={Movies} path="/movies" />
-        <ProtectedRoute isLoggedIn={isLoggedIn} component={SavedMovies} path="/saved-movies" />
-        <ProtectedRoute isLoggedIn={isLoggedIn} component={Profile} path="/profile" onSignout={handleSignout} />
+        <ProtectedRoute isLoggedIn={isLoggedIn} path="/movies" component={Movies} />
+        <ProtectedRoute isLoggedIn={isLoggedIn} path="/saved-movies" component={SavedMovies} />
+        <ProtectedRoute
+          isLoggedIn={isLoggedIn}
+          path="/profile"
+          component={Profile}
+          onSignout={handleSignout}
+          onUpdateProfile={handleUpdateProfile}
+        />
 
         <Route path='*' component={NotFound} />
       </Switch>

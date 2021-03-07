@@ -23,8 +23,6 @@
   padding: 0 0 16px;
   border-bottom: 1px solid #E8E8E8;
   box-sizing: border-box;
-  display: flex;
-  justify-content: space-between;
   font-size: 11px;
   line-height: 13px;
 }
@@ -47,6 +45,9 @@
   line-height: inherit;
   color: #000;
   margin: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .form__input {

@@ -7,7 +7,7 @@ import useFormWithValidation from '../../hooks/useFormWithValidation';
 const Login = ({ onLogin }) => {
   const {
     values, handleChange, errors, isValid,
-  } = useFormWithValidation({ name: '', email: '', password: '' });
+  } = useFormWithValidation({ email: '', password: '' });
 
   const handleFocus = (evt) => {
     evt.target.removeAttribute('readonly');

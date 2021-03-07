@@ -5,7 +5,7 @@ import './Form.css';
 const Form = ({
   children, submitButtonMod = '', buttonText, caption = '',
   linkPath, linkText, linkMod = '', onLinkClick = () => {},
-  data, onSubmit, isValid,
+  data = null, onSubmit, isValid,
 }) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
