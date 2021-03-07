@@ -16,8 +16,6 @@ import CurrentUserContext from '../../contexts/CurrentUserContext';
 import * as api from '../../utils/MainApi';
 
 const App = () => {
-  const history = useHistory();
-
   const [currentUser, setCurrentUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -26,9 +24,10 @@ const App = () => {
 
   const handleRegister = async ({ name, email, password }) => {
     try {
-      await api.register({ name, email, password });
+      const user = await api.register({ name, email, password });
 
-      history.push('/signin');
+      setCurrentUser(user);
+      setIsLoggedIn(true);
     } catch (err) {
       setError(err);
       setIsInfoTooltipOpen(true);

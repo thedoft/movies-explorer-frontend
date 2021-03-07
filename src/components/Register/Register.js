@@ -1,20 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Header from '../Header/Header';
 import Section from '../Section/Section';
 import Form from '../Form/Form';
+import useFormWithValidation from '../../hooks/useFormWithValidation';
 
 const Register = ({ onRegister }) => {
-  const [userData, setUserData] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
+  const {
+    values, handleChange, errors, isValid,
+  } = useFormWithValidation({ name: '', email: '', password: '' });
 
-  const handleChange = (evt) => {
-    setUserData({
-      ...userData,
-      [evt.target.name]: evt.target.value,
-    });
+  const handleFocus = (evt) => {
+    evt.target.removeAttribute('readonly');
   };
 
   return (
@@ -26,17 +22,22 @@ const Register = ({ onRegister }) => {
           caption="Уже зарегистрированы? "
           linkPath="/signin"
           linkText="Войти"
-          data={userData}
+          data={values}
           onSubmit={onRegister}
+          isValid={isValid}
         >
           <fieldset className="form__fieldset">
             <label className="form__label" htmlFor="name">Имя</label>
-            <input name="name" value={userData.name} onChange={handleChange} className="form__input" id="name" required minLength={2} maxLength={30} autoComplete="current-name" />
+            <input name="name" value={values.name} onChange={handleChange} className="form__input" id="name" required minLength={2} maxLength={30} autoComplete="current-name" pattern="^[а-яА-ЯЁё\s\-]+$" />
+            <span className="form__error">{errors.name}</span>
+
             <label className="form__label" htmlFor="email">E-mail</label>
-            <input name="email" value={userData.email} onChange={handleChange} type="email" className="form__input" id="email" required autoComplete="current-email" />
+            <input name="email" value={values.email} onChange={handleChange} type="email" className="form__input" id="email" required autoComplete="current-email" readOnly onFocus={handleFocus} pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
+            <span className="form__error">{errors.email}</span>
+
             <label className="form__label" htmlFor="password">Пароль</label>
-            <input name="password" value={userData.password} onChange={handleChange} type="password" className="form__input" id="password" required autoComplete="current-password" />
-            <span className="form__error"></span>
+            <input name="password" value={values.password} onChange={handleChange} type="password" className="form__input" id="password" required minLength={4} autoComplete="current-password" />
+            <span className="form__error">{errors.password}</span>
           </fieldset>
         </Form>
       </Section>

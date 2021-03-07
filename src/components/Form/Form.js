@@ -5,7 +5,7 @@ import './Form.css';
 const Form = ({
   children, submitButtonMod = '', buttonText, caption = '',
   linkPath, linkText, linkMod = '', onLinkClick = () => {},
-  data, onSubmit,
+  data, onSubmit, isValid,
 }) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -15,7 +15,7 @@ const Form = ({
   return (
     <form className="form" onSubmit={handleSubmit}>
       {children}
-      <button className={`form__submit-button ${submitButtonMod}`}>{buttonText}</button>
+      <button className={`form__submit-button ${submitButtonMod} ${!isValid && 'form__submit-button_inactive'}`}>{buttonText}</button>
       <p className="form__caption">
         {caption}
         <Link to={linkPath} onClick={onLinkClick} className={`form__link ${linkMod}`}>{linkText}</Link>
