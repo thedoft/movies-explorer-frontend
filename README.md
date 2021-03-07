@@ -2,4 +2,4 @@
 
 Проект доступен по ссылке:
 
-https://movies-explorer.students.nomoredomains.rocks
+https://thedoft.movies-explorer.students.nomoredomains.rocks
