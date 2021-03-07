@@ -1,7 +1,7 @@
 const fetchApi = async ({
-  url, path, method = 'GET', body = null,
+  BASE_URL, path = '', method = 'GET', body = null,
 }) => {
-  const res = await fetch(`${url}/${path}`, {
+  const res = await fetch(`${BASE_URL}/${path}`, {
     method,
     headers: {
       'Content-Type': 'application/json; charset=utf-8',

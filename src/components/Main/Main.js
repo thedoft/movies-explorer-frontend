@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from '../Header/Header';
 import AuthNav from '../AuthNav/AuthNav';
 import Navigation from '../Navigation/Navigation';
@@ -10,12 +10,12 @@ import Portfolio from '../Portfolio/Portfolio';
 import Footer from '../Footer/Footer';
 import './Main.css';
 
-const isLoggedIn = false;
-
-const Main = () => (
+const Main = ({ isLoggedIn }) => (
   <>
     <Header mod="header_section_main">
-      {!isLoggedIn ? <AuthNav /> : <Navigation />}
+      {
+        !isLoggedIn ? <AuthNav /> : <Navigation />
+      }
     </Header>
     <Promo />
     <AboutProject />

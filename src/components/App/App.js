@@ -22,6 +22,22 @@ const App = () => {
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const [error, setError] = useState({});
 
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const user = await api.getUserData();
+
+        setCurrentUser(user);
+        setIsLoggedIn(true);
+      } catch (err) {
+        setIsLoggedIn(false);
+        setCurrentUser({});
+      }
+    };
+
+    getUserData();
+  }, []);
+
   const handleRegister = async ({ name, email, password }) => {
     try {
       const user = await api.register({ name, email, password });
@@ -72,7 +88,9 @@ const App = () => {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Switch>
-        <Route exact path="/" component={Main} />
+        <Route exact path="/">
+          <Main isLoggedIn={isLoggedIn} />
+        </Route>
 
         <Route path="/signup">
           {!isLoggedIn ? <Register onRegister={handleRegister} /> : <Redirect to="/movies" />}
