@@ -13,3 +13,7 @@ export const login = ({ email, password }) => fetchApi({
 export const logout = () => fetchApi({
   url: BASE_URL, path: 'signout',
 });
+
+export const updateProfile = ({ name, email }) => fetchApi({
+  url: BASE_URL, path: 'users/me', method: 'PATCH', body: { name, email },
+});

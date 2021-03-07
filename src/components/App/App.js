@@ -58,8 +58,15 @@ const App = () => {
     }
   };
 
-  const handleUpdateProfile = (values) => {
+  const handleUpdateProfile = async ({ name, email }) => {
+    try {
+      const user = await api.updateProfile({ name, email });
 
+      setCurrentUser(user);
+    } catch (err) {
+      setError(err);
+      setIsInfoTooltipOpen(true);
+    }
   };
 
   return (
