@@ -1,5 +1,6 @@
 .movie {
   width: 100%;
+  max-width: 360px;
   padding: 0 0 12px;
   position: relative;
 }
@@ -42,7 +43,7 @@
   border-radius: 3px;
 }
 
-.movie__button {
+.movie__save-button {
   position: absolute;
   top: 14px;
   right: 14px;
@@ -50,15 +51,7 @@
   border: none;
   border-radius: 30px;
   transition: transform .25s ease-in-out;
-}
-
-.movie__button:hover {
-  box-shadow: #3456F3 0 0 1px 1px;
-  transform: scale(1.1);
-  transition: transform .25s ease-in-out;
-}
-
-.movie__button_type_save {
+  cursor: pointer;
   padding: 6px 7px;
   box-sizing: border-box;
   background: #F4F4F4;
@@ -66,10 +59,15 @@
   line-height: 9px;
   width: 72px;
   visibility: hidden;
-  cursor: pointer;
 }
 
-.movie:hover .movie__button_type_save {
+.movie__save-button:hover {
+  box-shadow: #3456F3 0 0 1px 1px;
+  transform: scale(1.1);
+  transition: transform .25s ease-in-out;
+}
+
+.movie:hover .movie__save-button {
   visibility: visible;
 }
 
@@ -77,18 +75,13 @@
   width: 21px;
   height: 21px;
   background: #EE3465 url(../../images/saved-icon.svg) no-repeat center;
+  visibility: visible;
 }
 
-.movie__button_type_remove {
+.movie:hover .movie__saved-icon {
   width: 21px;
   height: 21px;
   background: #F4F4F4 url(../../images/remove-icon.svg) no-repeat center;
-  visibility: hidden;
-  cursor: pointer;
-}
-
-.movie:hover .movie__button_type_remove {
-  visibility: visible;
 }
 
 @media screen and (max-width: 768px) {

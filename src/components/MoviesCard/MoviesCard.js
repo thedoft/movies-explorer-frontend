@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './MoviesCard.css';
 import { BASE_URL } from '../../utils/MoviesApi';
 
-const MoviesCard = ({ movie, isRemovable = false }) => {
+const MoviesCard = ({ movie }) => {
   const {
     image, nameRU, duration, trailerLink,
   } = movie;
@@ -14,8 +14,12 @@ const MoviesCard = ({ movie, isRemovable = false }) => {
     window.open(trailerLink);
   };
 
-  const handleSaveMovie = () => {
+  const handleSave = () => {
     setIsSaved(true);
+  };
+
+  const handleRemove = () => {
+    setIsSaved(false);
   };
 
   return (
@@ -25,9 +29,12 @@ const MoviesCard = ({ movie, isRemovable = false }) => {
         <p className="movie__title">{nameRU}</p>
         <span className="movie__duration">{duration}</span>
       </div>
-        {!isSaved && <button className="movie__button movie__button_type_save" onClick={handleSaveMovie}>Cохранить</button>}
-        {(isSaved && isRemovable) && <button className="movie__button movie__button_type_remove" />}
-        {(isSaved && !isRemovable) && <span className="movie__button movie__saved-icon" />}
+      <button
+        className={`movie__save-button ${isSaved && 'movie__saved-icon'}`}
+        onClick={!isSaved ? handleSave : handleRemove}
+      >
+        {!isSaved && 'Cохранить'}
+      </button>
     </li>
   );
 };

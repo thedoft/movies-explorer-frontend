@@ -15,7 +15,7 @@ const SavedMovies = () => (
       <Navigation />
     </Header>
     <SearchForm />
-    <MoviesCardList movies={defaultMoviesShort} isRemovable />
+    <MoviesCardList movies={defaultMoviesShort} />
     <Footer />
     {isLoading && <Preloader />}
   </>
