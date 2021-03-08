@@ -1,5 +1,5 @@
 const fetchApi = async ({
-  BASE_URL, path = '', method = 'GET', body = null,
+  BASE_URL, path = '', method = 'GET', body = null, credentials = 'include',
 }) => {
   const res = await fetch(`${BASE_URL}/${path}`, {
     method,
@@ -7,7 +7,7 @@ const fetchApi = async ({
       'Content-Type': 'application/json; charset=utf-8',
     },
     body: body && JSON.stringify(body),
-    credentials: 'include',
+    credentials,
   });
 
   if (!res.ok) {

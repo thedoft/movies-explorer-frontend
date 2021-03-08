@@ -99,7 +99,7 @@ const App = () => {
           {!isLoggedIn ? <Login onLogin={handleLogin} /> : <Redirect to="/movies" />}
         </Route>
 
-        <ProtectedRoute isLoggedIn={isLoggedIn} path="/movies" component={Movies} />
+        <ProtectedRoute isLoggedIn={isLoggedIn} path="/movies" component={Movies} setError={setError} setIsInfoTooltipOpen={setIsInfoTooltipOpen} />
         <ProtectedRoute isLoggedIn={isLoggedIn} path="/saved-movies" component={SavedMovies} />
         <ProtectedRoute
           isLoggedIn={isLoggedIn}
