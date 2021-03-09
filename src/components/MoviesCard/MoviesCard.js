@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import './MoviesCard.css';
 import { BASE_URL } from '../../utils/MoviesApi';
 
-const MoviesCard = ({ movie }) => {
+const MoviesCard = ({ movie, onSave, onRemove }) => {
   const {
-    image, nameRU, duration, trailerLink,
+    country, director, year, description, image,
+    nameRU, nameEN, duration, trailerLink, id,
   } = movie;
   const movieImage = image ? (BASE_URL + image.url) : '';
+  const movieThumbnail = image ? (BASE_URL + image.formats.thumbnail.url) : '';
 
   const [isSaved, setIsSaved] = useState(false);
 
@@ -16,11 +18,26 @@ const MoviesCard = ({ movie }) => {
 
   const handleSave = () => {
     setIsSaved(true);
-    console.log(movie);
+
+    onSave({
+      country,
+      director,
+      duration,
+      year,
+      description,
+      image: movieImage,
+      trailer: trailerLink,
+      thumbnail: movieThumbnail,
+      nameRU,
+      nameEN,
+      movieId: id,
+    });
   };
 
   const handleRemove = () => {
     setIsSaved(false);
+
+    onRemove({ movieId: id });
   };
 
   return (

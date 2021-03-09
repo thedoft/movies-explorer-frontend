@@ -14,6 +14,7 @@ import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import './App.css';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import * as api from '../../utils/MainApi';
+import * as moviesApi from '../../utils/MoviesApi';
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState({});
@@ -85,6 +86,38 @@ const App = () => {
     }
   };
 
+  const fetchError = 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз';
+
+  const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isFetched, setIsFetched] = useState(false);
+
+  const getMovies = async () => {
+    setIsLoading(true);
+    setIsFetched(true);
+
+    try {
+      const fetchedMovies = await moviesApi.getMovies();
+
+      setMovies(fetchedMovies);
+    } catch (err) {
+      setError({ message: fetchError });
+      setIsInfoTooltipOpen(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const saveMovie = async (movieData) => {
+    await api.saveMovie(movieData);
+    const m = await api.getMovies();
+    console.log(m);
+  };
+
+  const removeMovie = async (movieId) => {
+    await api.removeMovie(movieId);
+  };
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Switch>
@@ -103,8 +136,12 @@ const App = () => {
           path="/movies"
           isLoggedIn={isLoggedIn}
           component={Movies}
-          setError={setError}
-          setIsInfoTooltipOpen={setIsInfoTooltipOpen}
+          getMovies={getMovies}
+          movies={movies}
+          isFetched={isFetched}
+          isLoading={isLoading}
+          saveMovie={saveMovie}
+          removeMovie={removeMovie}
         />
 
         <ProtectedRoute

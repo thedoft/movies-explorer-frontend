@@ -3,7 +3,9 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import Preloader from '../Preloader/Preloader';
 import './MoviesCardList.css';
 
-const MoviesCardList = ({ movies, isLoading }) => {
+const MoviesCardList = ({
+  movies, isLoading, saveMovie, removeMovie,
+}) => {
   const renderedMovies = document.querySelectorAll('.movie');
 
   const [renderedMoviesLength, setRenderedMoviesLength] = useState(0);
@@ -58,7 +60,12 @@ const MoviesCardList = ({ movies, isLoading }) => {
               movies.reduce((moviesToRender, movie, index) => {
                 if (moviesToRender.length < renderedMoviesCount) {
                   moviesToRender
-                    .push(<MoviesCard movie={movie} key={index} />);
+                    .push(<MoviesCard
+                      movie={movie}
+                      key={index}
+                      onSave={saveMovie}
+                      onRemove={removeMovie}
+                    />);
                 }
                 return moviesToRender;
               }, [])
