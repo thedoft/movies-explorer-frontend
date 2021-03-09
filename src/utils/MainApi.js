@@ -21,3 +21,33 @@ export const getUserData = () => fetchApi({
 export const updateProfile = ({ name, email }) => fetchApi({
   BASE_URL, path: 'users/me', method: 'PATCH', body: { name, email },
 });
+
+export const getMovies = () => fetchApi({
+  BASE_URL, path: 'movies',
+});
+
+export const saveMovie = ({
+  country, director, duration, year, description,
+  image, trailer, thumbnail, nameRU, nameEN, movieId,
+}) => fetchApi({
+  BASE_URL,
+  path: 'movies',
+  method: 'POST',
+  body: {
+    country,
+    director,
+    duration,
+    year,
+    description,
+    image,
+    trailer,
+    thumbnail,
+    nameRU,
+    nameEN,
+    movieId,
+  },
+});
+
+export const removeMovie = ({ movieId }) => fetchApi({
+  BASE_URL, path: `movies/${movieId}`, method: 'DELETE',
+});

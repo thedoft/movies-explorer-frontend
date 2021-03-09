@@ -16,6 +16,7 @@ const MoviesCard = ({ movie }) => {
 
   const handleSave = () => {
     setIsSaved(true);
+    console.log(movie);
   };
 
   const handleRemove = () => {
