@@ -1,6 +1,6 @@
 import React from 'react';
 import './Portfolio.css';
-import { staticSite, adaptiveSite, spa } from '../../utils/links';
+import { staticSite, adaptiveSite, spa } from '../../utils/constants';
 
 const Portfolio = () => (
   <div className="portfolio">

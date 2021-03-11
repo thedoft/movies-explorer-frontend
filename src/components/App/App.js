@@ -13,7 +13,7 @@ import './App.css';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import * as api from '../../utils/MainApi';
 import * as moviesApi from '../../utils/MoviesApi';
-import fetchError from '../../utils/constants';
+import { fetchError } from '../../utils/constants';
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState({});

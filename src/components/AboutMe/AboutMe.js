@@ -2,7 +2,7 @@ import React from 'react';
 import Section from '../Section/Section';
 import './AboutMe.css';
 import photo from '../../images/photo.jpg';
-import { facebook, github } from '../../utils/links';
+import { facebook, github } from '../../utils/constants';
 
 const AboutMe = ({ children }) => (
   <Section mod="about-me" sectionTitleMod="about-me__title" sectionTitle="Студент">
