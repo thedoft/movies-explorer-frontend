@@ -7,7 +7,8 @@
 
 .movie__image {
   width: 100%;
-  height: 201px;
+  min-height: 201px;
+  max-height: 201px;
   margin: 0 0 14px;
   border-radius: 6px;
   object-fit: cover;
@@ -86,13 +87,15 @@
 
 @media screen and (max-width: 768px) {
   .movie__image {
-    height: 190px;
+    min-height: 190px;
+    max-height: 190px;
   }
 }
 
 @media screen and (max-width: 640px) {
   .movie__image {
-    height: 168px;
+    min-height: 168px;
+    max-height: 168px;
     margin-bottom: 16px;
   }
 

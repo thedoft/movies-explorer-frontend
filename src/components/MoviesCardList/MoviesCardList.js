@@ -4,7 +4,7 @@ import Preloader from '../Preloader/Preloader';
 import './MoviesCardList.css';
 
 const MoviesCardList = ({
-  movies, isLoading, saveMovie, removeMovie,
+  movies, isLoading = false, saveMovie = () => {}, removeMovie,
 }) => {
   const renderedMovies = document.querySelectorAll('.movie');
 

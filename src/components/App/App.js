@@ -23,6 +23,7 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [movies, setMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
 
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const [error, setError] = useState({});
@@ -99,7 +100,7 @@ const App = () => {
       setMovies(fetchedMovies);
       setIsFetched(true);
     }
-  }, [isFetched]);
+  }, []);
 
   const getMovies = async () => {
     setIsLoading(true);
@@ -108,8 +109,20 @@ const App = () => {
     try {
       const fetchedMovies = await moviesApi.getMovies();
 
-      setMovies(fetchedMovies);
-      localStorage.setItem('fetchedMovies', JSON.stringify(fetchedMovies));
+      const formattedFetchedMovies = fetchedMovies.map((movie) => {
+        const formattedMovie = {
+          ...movie,
+          movieId: movie.id,
+          image: movie.image ? (moviesApi.BASE_URL + movie.image.url) : '',
+          thumbnail: movie.image ? (moviesApi.BASE_URL + movie.image.formats.thumbnail.url) : '',
+          trailer: movie.trailerLink,
+        };
+
+        return formattedMovie;
+      });
+
+      setMovies(formattedFetchedMovies);
+      localStorage.setItem('fetchedMovies', JSON.stringify(formattedFetchedMovies));
     } catch (err) {
       setError({ message: fetchError });
       setIsInfoTooltipOpen(true);
@@ -120,16 +133,23 @@ const App = () => {
 
   const getSavedMovies = async () => {
     try {
-      const savedMovies = await api.getMovies();
+      const fetchedSavedMovies = await api.getMovies();
 
-      const savedMoviesIds = savedMovies.map((movie) => movie.movieId);
+      const savedMoviesIds = fetchedSavedMovies.map((movie) => movie.movieId);
 
+      setSavedMovies(fetchedSavedMovies);
       localStorage.setItem('savedMoviesIds', JSON.stringify(savedMoviesIds));
     } catch (err) {
       setError(err);
       setIsInfoTooltipOpen(true);
     }
   };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      getSavedMovies();
+    }
+  }, [isLoggedIn]);
 
   const saveMovie = async (movieData) => {
     try {
@@ -173,13 +193,14 @@ const App = () => {
           movies={movies}
           saveMovie={saveMovie}
           removeMovie={removeMovie}
-          getSavedMovies={getSavedMovies}
         />
 
         <ProtectedRoute
           path="/saved-movies"
           isLoggedIn={isLoggedIn}
           component={SavedMovies}
+          movies={savedMovies}
+          removeMovie={removeMovie}
         />
 
         <ProtectedRoute

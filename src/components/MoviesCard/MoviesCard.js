@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './MoviesCard.css';
-import { BASE_URL } from '../../utils/MoviesApi';
 
 const MoviesCard = ({ movie, onSave, onRemove }) => {
   const {
-    country, director, year, description, image,
-    nameRU, nameEN, duration, trailerLink, id,
+    country, director, year, description, image, thumbnail,
+    nameRU, nameEN, duration, trailer, movieId,
   } = movie;
-  const movieImage = image ? (BASE_URL + image.url) : '';
-  const movieThumbnail = image ? (BASE_URL + image.formats.thumbnail.url) : '';
 
   const [savedMoviesIds, setSavedMoviesIds] = useState([]);
   const [isSaved, setIsSaved] = useState(false);
@@ -16,15 +13,15 @@ const MoviesCard = ({ movie, onSave, onRemove }) => {
   useEffect(() => {
     const localSavedMoviesIds = JSON.parse(localStorage.getItem('savedMoviesIds'));
 
-    if (localSavedMoviesIds.includes(id)) {
+    if (localSavedMoviesIds && localSavedMoviesIds.includes(movieId)) {
       setIsSaved(true);
     } else {
       setIsSaved(false);
     }
-  }, [id]);
+  }, [movieId]);
 
   const handleClick = () => {
-    window.open(trailerLink);
+    window.open(trailer);
   };
 
   const handleSave = async () => {
@@ -34,22 +31,22 @@ const MoviesCard = ({ movie, onSave, onRemove }) => {
       duration,
       year,
       description,
-      image: movieImage,
-      trailer: trailerLink,
-      thumbnail: movieThumbnail,
+      image,
+      trailer,
+      thumbnail,
       nameRU,
       nameEN,
-      movieId: id,
+      movieId,
     });
 
-    await setSavedMoviesIds([...savedMoviesIds, id]);
+    await setSavedMoviesIds([...savedMoviesIds, movieId]);
     setIsSaved(true);
   };
 
   const handleRemove = () => {
-    onRemove({ movieId: id });
+    onRemove({ movieId });
 
-    const filteredSavedMoviesIds = savedMoviesIds.filter((movieId) => movieId !== id);
+    const filteredSavedMoviesIds = savedMoviesIds.filter((id) => id !== movieId);
 
     setSavedMoviesIds(filteredSavedMoviesIds);
     setIsSaved(false);
@@ -57,7 +54,7 @@ const MoviesCard = ({ movie, onSave, onRemove }) => {
 
   return (
     <li className="movie">
-      <img className="movie__image" src={movieImage} alt={nameRU} onClick={handleClick} />
+      <img className="movie__image" src={image} alt={nameRU} onClick={handleClick} />
       <div className="movie__text-container">
         <p className="movie__title">{nameRU}</p>
         <span className="movie__duration">{duration}</span>
