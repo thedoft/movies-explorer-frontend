@@ -59,13 +59,14 @@ const MoviesCardList = ({
             {
               movies.reduce((moviesToRender, movie, index) => {
                 if (moviesToRender.length < renderedMoviesCount) {
-                  moviesToRender
-                    .push(<MoviesCard
+                  moviesToRender.push(
+                    <MoviesCard
                       movie={movie}
                       key={index}
                       onSave={saveMovie}
                       onRemove={removeMovie}
-                    />);
+                    />,
+                  );
                 }
                 return moviesToRender;
               }, [])

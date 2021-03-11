@@ -1,7 +1,7 @@
 import fetchApi from './fetchApi';
 
-export const BASE_URL = 'https://api.thedoft.movies-explorer.students.nomoredomains.rocks';
-// export const BASE_URL = 'http://localhost:3000';
+// export const BASE_URL = 'https://api.thedoft.movies-explorer.students.nomoredomains.rocks';
+export const BASE_URL = 'http://localhost:3000';
 
 export const register = ({ name, email, password }) => fetchApi({
   BASE_URL, path: 'signup', method: 'POST', body: { name, email, password },

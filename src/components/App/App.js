@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Switch, Route, Redirect, useHistory,
-} from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Main from '../Main/Main';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
@@ -15,10 +13,16 @@ import './App.css';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import * as api from '../../utils/MainApi';
 import * as moviesApi from '../../utils/MoviesApi';
+import fetchError from '../../utils/constants';
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const [isFetched, setIsFetched] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [movies, setMovies] = useState([]);
 
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const [error, setError] = useState({});
@@ -39,9 +43,9 @@ const App = () => {
     getUserData();
   }, []);
 
-  const handleRegister = async ({ name, email, password }) => {
+  const handleRegister = async (userData) => {
     try {
-      const user = await api.register({ name, email, password });
+      const user = await api.register(userData);
 
       setCurrentUser(user);
       setIsLoggedIn(true);
@@ -51,9 +55,9 @@ const App = () => {
     }
   };
 
-  const handleLogin = async ({ email, password }) => {
+  const handleLogin = async (userData) => {
     try {
-      const user = await api.login({ email, password });
+      const user = await api.login(userData);
 
       setCurrentUser(user);
       setIsLoggedIn(true);
@@ -69,15 +73,17 @@ const App = () => {
 
       setIsLoggedIn(false);
       setCurrentUser({});
+
+      localStorage.clear();
     } catch (err) {
       setError(err);
       setIsInfoTooltipOpen(true);
     }
   };
 
-  const handleUpdateProfile = async ({ name, email }) => {
+  const handleUpdateProfile = async (userData) => {
     try {
-      const user = await api.updateProfile({ name, email });
+      const user = await api.updateProfile(userData);
 
       setCurrentUser(user);
     } catch (err) {
@@ -86,11 +92,14 @@ const App = () => {
     }
   };
 
-  const fetchError = 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз';
+  useEffect(() => {
+    const fetchedMovies = JSON.parse(localStorage.getItem('fetchedMovies'));
 
-  const [movies, setMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isFetched, setIsFetched] = useState(false);
+    if (fetchedMovies) {
+      setMovies(fetchedMovies);
+      setIsFetched(true);
+    }
+  }, [isFetched]);
 
   const getMovies = async () => {
     setIsLoading(true);
@@ -100,6 +109,7 @@ const App = () => {
       const fetchedMovies = await moviesApi.getMovies();
 
       setMovies(fetchedMovies);
+      localStorage.setItem('fetchedMovies', JSON.stringify(fetchedMovies));
     } catch (err) {
       setError({ message: fetchError });
       setIsInfoTooltipOpen(true);
@@ -108,14 +118,35 @@ const App = () => {
     }
   };
 
+  const getSavedMovies = async () => {
+    try {
+      const savedMovies = await api.getMovies();
+
+      const savedMoviesIds = savedMovies.map((movie) => movie.movieId);
+
+      localStorage.setItem('savedMoviesIds', JSON.stringify(savedMoviesIds));
+    } catch (err) {
+      setError(err);
+      setIsInfoTooltipOpen(true);
+    }
+  };
+
   const saveMovie = async (movieData) => {
-    await api.saveMovie(movieData);
-    const m = await api.getMovies();
-    console.log(m);
+    try {
+      await api.saveMovie(movieData);
+    } catch (err) {
+      setError(err);
+      setIsInfoTooltipOpen(true);
+    }
   };
 
   const removeMovie = async (movieId) => {
-    await api.removeMovie(movieId);
+    try {
+      await api.removeMovie(movieId);
+    } catch (err) {
+      setError(err);
+      setIsInfoTooltipOpen(true);
+    }
   };
 
   return (
@@ -136,12 +167,13 @@ const App = () => {
           path="/movies"
           isLoggedIn={isLoggedIn}
           component={Movies}
-          getMovies={getMovies}
-          movies={movies}
           isFetched={isFetched}
           isLoading={isLoading}
+          getMovies={getMovies}
+          movies={movies}
           saveMovie={saveMovie}
           removeMovie={removeMovie}
+          getSavedMovies={getSavedMovies}
         />
 
         <ProtectedRoute

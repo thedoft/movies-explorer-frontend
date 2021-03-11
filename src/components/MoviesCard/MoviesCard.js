@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './MoviesCard.css';
 import { BASE_URL } from '../../utils/MoviesApi';
 
@@ -10,15 +10,24 @@ const MoviesCard = ({ movie, onSave, onRemove }) => {
   const movieImage = image ? (BASE_URL + image.url) : '';
   const movieThumbnail = image ? (BASE_URL + image.formats.thumbnail.url) : '';
 
+  const [savedMoviesIds, setSavedMoviesIds] = useState([]);
   const [isSaved, setIsSaved] = useState(false);
+
+  useEffect(() => {
+    const localSavedMoviesIds = JSON.parse(localStorage.getItem('savedMoviesIds'));
+
+    if (localSavedMoviesIds.includes(id)) {
+      setIsSaved(true);
+    } else {
+      setIsSaved(false);
+    }
+  }, [id]);
 
   const handleClick = () => {
     window.open(trailerLink);
   };
 
-  const handleSave = () => {
-    setIsSaved(true);
-
+  const handleSave = async () => {
     onSave({
       country,
       director,
@@ -32,12 +41,18 @@ const MoviesCard = ({ movie, onSave, onRemove }) => {
       nameEN,
       movieId: id,
     });
+
+    await setSavedMoviesIds([...savedMoviesIds, id]);
+    setIsSaved(true);
   };
 
   const handleRemove = () => {
-    setIsSaved(false);
-
     onRemove({ movieId: id });
+
+    const filteredSavedMoviesIds = savedMoviesIds.filter((movieId) => movieId !== id);
+
+    setSavedMoviesIds(filteredSavedMoviesIds);
+    setIsSaved(false);
   };
 
   return (

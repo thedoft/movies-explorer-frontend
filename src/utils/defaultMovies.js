@@ -29,46 +29,6 @@ const defaultMoviesTemplate = [
     duration,
     isSaved: true,
   },
-  {
-    title: 'Бег это свобода',
-    duration,
-    isSaved: false,
-  },
-  {
-    title: 'Книготорговцы',
-    duration,
-    isSaved: false,
-  },
-  {
-    title: 'Когда я думаю о Германии ночью',
-    duration,
-    isSaved: false,
-  },
-  {
-    title: 'Gimme Danger: История Игги и The Stooges',
-    duration,
-    isSaved: false,
-  },
-  {
-    title: 'Дженис: Маленькая девочка грустит',
-    duration,
-    isSaved: true,
-  },
-  {
-    title: 'Соберись перед прыжком',
-    duration,
-    isSaved: false,
-  },
-  {
-    title: 'Пи Джей Харви: A dog called money',
-    duration,
-    isSaved: false,
-  },
-  {
-    title: 'По волнам: Искусство звука в кино',
-    duration,
-    isSaved: false,
-  },
 ];
 
 export const defaultMovies = defaultMoviesTemplate.map((movie, index) => {

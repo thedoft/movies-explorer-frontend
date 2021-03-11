@@ -5,7 +5,6 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 import Preloader from '../Preloader/Preloader';
-import { defaultMoviesShort } from '../../utils/defaultMovies';
 
 const isLoading = false;
 
@@ -15,7 +14,7 @@ const SavedMovies = () => (
       <Navigation />
     </Header>
     <SearchForm />
-    <MoviesCardList movies={defaultMoviesShort} />
+    <MoviesCardList />
     <Footer />
     {isLoading && <Preloader />}
   </>
