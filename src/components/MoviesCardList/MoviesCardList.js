@@ -13,6 +13,8 @@ const MoviesCardList = ({
   const [MoviesToMoreRenderCount, setMoviesToMoreRenderCount] = useState(0);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  const location = window.location.pathname;
+
   let resizeTimeout = null;
 
   const updateWindowWidth = () => {
@@ -33,17 +35,21 @@ const MoviesCardList = ({
   });
 
   useEffect(() => {
-    if (windowWidth <= 480) {
-      setRenderedMoviesCount(5);
-      setMoviesToMoreRenderCount(2);
-    } else if (windowWidth <= 768) {
-      setRenderedMoviesCount(8);
-      setMoviesToMoreRenderCount(2);
+    if (location === '/movies') {
+      if (windowWidth <= 480) {
+        setRenderedMoviesCount(5);
+        setMoviesToMoreRenderCount(2);
+      } else if (windowWidth <= 768) {
+        setRenderedMoviesCount(8);
+        setMoviesToMoreRenderCount(2);
+      } else {
+        setRenderedMoviesCount(12);
+        setMoviesToMoreRenderCount(3);
+      }
     } else {
-      setRenderedMoviesCount(12);
-      setMoviesToMoreRenderCount(3);
+      setRenderedMoviesCount(movies.length);
     }
-  }, [windowWidth]);
+  }, [windowWidth, location, movies.length]);
 
   const handleMoreClick = () => {
     setRenderedMoviesCount(renderedMoviesCount + MoviesToMoreRenderCount);
