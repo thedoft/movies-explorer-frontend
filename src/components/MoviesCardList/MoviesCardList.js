@@ -52,7 +52,7 @@ const MoviesCardList = ({
   return (
     <section className="movies">
       { isLoading && <Preloader /> }
-      { (!isLoading && !movies) && <p className="movies__error">Ничего не найдено</p> }
+      { (!isLoading && movies.length === 0) && <p className="movies__error">Ничего не найдено</p> }
       {
         (!isLoading && movies)
           && <ul className="movies__list">

@@ -6,13 +6,13 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 
 const Movies = ({
-  getMovies, movies, saveMovie, removeMovie, isFetched, isLoading, savedMoviesIds,
+  searchMovies, movies, saveMovie, removeMovie, isFetched, isLoading, savedMoviesIds,
 }) => (
   <>
     <Header>
       <Navigation />
     </Header>
-    <SearchForm getMovies={getMovies} />
+    <SearchForm searchMovies={searchMovies} />
     {
       isFetched
         && <MoviesCardList

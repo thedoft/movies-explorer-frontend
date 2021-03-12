@@ -26,6 +26,7 @@ const App = () => {
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
   const [savedMoviesIds, setSavedMoviesIds] = useState([]);
+  const [filteredSavedMovies, setFilteredSavedMovies] = useState([]);
 
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const [error, setError] = useState({});
@@ -44,6 +45,15 @@ const App = () => {
     };
 
     getUserData();
+  }, []);
+
+  useEffect(() => {
+    const fetchedMovies = JSON.parse(localStorage.getItem('fetchedMovies'));
+
+    if (fetchedMovies) {
+      setMovies(fetchedMovies);
+      setIsFetched(true);
+    }
   }, []);
 
   const handleRegister = async (userData) => {
@@ -95,16 +105,7 @@ const App = () => {
     }
   };
 
-  useEffect(() => {
-    const fetchedMovies = JSON.parse(localStorage.getItem('fetchedMovies'));
-
-    if (fetchedMovies) {
-      setMovies(fetchedMovies);
-      setIsFetched(true);
-    }
-  }, []);
-
-  const getMovies = async (keyword, isIncludesShorts) => {
+  const searchMovies = async (keyword, isIncludesShorts) => {
     setIsLoading(true);
     setIsFetched(true);
 
@@ -143,6 +144,7 @@ const App = () => {
 
       setSavedMovies(fetchedSavedMovies);
       setSavedMoviesIds(fetchedSavedMoviesIds);
+      setFilteredSavedMovies(fetchedSavedMovies);
     } catch (err) {
       setError(err);
       setIsInfoTooltipOpen(true);
@@ -155,12 +157,19 @@ const App = () => {
     }
   }, [isLoggedIn]);
 
+  const searchSavedMovies = (keyword, isIncludesShorts) => {
+    const searchedMovies = filterSearch(savedMovies, keyword, isIncludesShorts);
+
+    setFilteredSavedMovies(searchedMovies);
+  };
+
   const saveMovie = async (movieData) => {
     try {
       const savedMovie = await api.saveMovie(movieData);
 
       setSavedMovies([...savedMovies, savedMovie]);
       setSavedMoviesIds([...savedMoviesIds, savedMovie.movieId]);
+      setFilteredSavedMovies([...savedMovies, savedMovie]);
     } catch (err) {
       setError(err);
       setIsInfoTooltipOpen(true);
@@ -176,6 +185,7 @@ const App = () => {
 
       setSavedMovies(filteredMovies);
       setSavedMoviesIds(filteredMoviesIds);
+      setFilteredSavedMovies(filteredMovies);
     } catch (err) {
       setError(err);
       setIsInfoTooltipOpen(true);
@@ -202,7 +212,7 @@ const App = () => {
           component={Movies}
           isFetched={isFetched}
           isLoading={isLoading}
-          getMovies={getMovies}
+          searchMovies={searchMovies}
           movies={movies}
           saveMovie={saveMovie}
           removeMovie={removeMovie}
@@ -213,7 +223,8 @@ const App = () => {
           path="/saved-movies"
           isLoggedIn={isLoggedIn}
           component={SavedMovies}
-          movies={savedMovies}
+          searchMovies={searchSavedMovies}
+          movies={filteredSavedMovies}
           removeMovie={removeMovie}
           savedMoviesIds={savedMoviesIds}
         />

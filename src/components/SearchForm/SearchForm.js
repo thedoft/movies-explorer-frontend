@@ -1,25 +1,25 @@
 import React, { useState, useRef } from 'react';
 import './SearchForm.css';
 
-const SearchForm = ({ getMovies }) => {
+const SearchForm = ({ searchMovies }) => {
   const searchError = 'Нужно ввести ключевое слово';
 
   const [error, setError] = useState('');
-  const [film, setFilm] = useState('');
+  const [movie, setMovie] = useState('');
   const checked = useRef();
 
   const handleChange = (evt) => {
-    setFilm(evt.target.value);
+    setMovie(evt.target.value);
   };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
-    if (!film) {
+    if (!movie) {
       setError(searchError);
     } else {
       setError('');
-      getMovies(film, checked.current.checked);
+      searchMovies(movie, checked.current.checked);
     }
   };
 
@@ -29,7 +29,7 @@ const SearchForm = ({ getMovies }) => {
 
         <div className="search-form__search-container">
           <div className="search-form__input-container">
-            <input value={film} onChange={handleChange} className="search-form__input" placeholder="Фильм" />
+            <input value={movie} onChange={handleChange} className="search-form__input" placeholder="Фильм" />
             <button className="search-form__button">Найти</button>
           </div>
 
