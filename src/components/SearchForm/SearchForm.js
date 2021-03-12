@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './SearchForm.css';
 
 const SearchForm = ({ getMovies }) => {
   const searchError = 'Нужно ввести ключевое слово';
 
-  const [film, setFilm] = useState('');
   const [error, setError] = useState('');
+  const [film, setFilm] = useState('');
+  const checked = useRef();
 
   const handleChange = (evt) => {
     setFilm(evt.target.value);
@@ -18,7 +19,7 @@ const SearchForm = ({ getMovies }) => {
       setError(searchError);
     } else {
       setError('');
-      getMovies();
+      getMovies(film, checked.current.checked);
     }
   };
 
@@ -33,7 +34,7 @@ const SearchForm = ({ getMovies }) => {
           </div>
 
           <div className="search-form__checkbox-container">
-            <input className="search-form__checkbox" type="checkbox" id="switch" defaultChecked />
+            <input ref={checked} className="search-form__checkbox" type="checkbox" id="switch" defaultChecked />
             <label className="search-form__checkbox-label" htmlFor="switch">
               <span className="search-form__checkbox-switch" />
             </label>

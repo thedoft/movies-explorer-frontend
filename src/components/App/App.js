@@ -13,6 +13,7 @@ import './App.css';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import * as api from '../../utils/MainApi';
 import * as moviesApi from '../../utils/MoviesApi';
+import filterSearch from '../../utils/utils';
 import { fetchError } from '../../utils/constants';
 
 const App = () => {
@@ -103,12 +104,14 @@ const App = () => {
     }
   }, []);
 
-  const getMovies = async () => {
+  const getMovies = async (keyword, isIncludesShorts) => {
     setIsLoading(true);
     setIsFetched(true);
 
     try {
-      const fetchedMovies = await moviesApi.getMovies();
+      let fetchedMovies = await moviesApi.getMovies();
+
+      fetchedMovies = filterSearch(fetchedMovies, keyword, isIncludesShorts);
 
       const formattedFetchedMovies = fetchedMovies.map((movie) => {
         const formattedMovie = {
