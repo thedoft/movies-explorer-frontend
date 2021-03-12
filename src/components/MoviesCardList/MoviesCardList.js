@@ -63,12 +63,12 @@ const MoviesCardList = ({
         (!isLoading && movies)
           && <ul className="movies__list">
             {
-              movies.reduce((moviesToRender, movie, index) => {
+              movies.reduce((moviesToRender, movie) => {
                 if (moviesToRender.length < renderedMoviesCount) {
                   moviesToRender.push(
                     <MoviesCard
                       movie={movie}
-                      key={index}
+                      key={movie.id}
                       onSave={saveMovie}
                       onRemove={removeMovie}
                       savedMoviesIds={savedMoviesIds}

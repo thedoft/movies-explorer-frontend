@@ -21,11 +21,14 @@
   line-height: 19px;
 }
 
-.not-found__back-link {
+.not-found__back-button {
+  border: none;
+  padding: 0;
+  margin: 0;
   font-size: 14px;
   line-height: 17px;
   color: #3456f3;
-  text-decoration: none;
+  background: transparent;
 }
 
 @media screen and (max-width: 768px) {
@@ -51,7 +54,7 @@
     margin-bottom: 284px;
   }
 
-  .not-found__back-link {
+  .not-found__back-button {
     font-size: 12px;
     line-height: 15px;
   }
