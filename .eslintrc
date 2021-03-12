@@ -3,7 +3,6 @@
   "rules": {
     "no-underscore-dangle": "off",
     "react/prop-types": 0,
-    "no-unused-vars": "off"
   },
   "env": {
     "browser": true

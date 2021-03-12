@@ -17,6 +17,7 @@ import filterSearch from '../../utils/utils';
 import { fetchError } from '../../utils/constants';
 
 const App = () => {
+  const [isTokenChecked, setIsTokenChecked] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -38,9 +39,8 @@ const App = () => {
 
         setCurrentUser(user);
         setIsLoggedIn(true);
-      } catch (err) {
-        setIsLoggedIn(false);
-        setCurrentUser({});
+      } finally {
+        setIsTokenChecked(true);
       }
     };
 
@@ -193,51 +193,53 @@ const App = () => {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <Switch>
-        <Route exact path="/">
-          <Main isLoggedIn={isLoggedIn} />
-        </Route>
+      {isTokenChecked
+        && <Switch>
+          <Route exact path="/">
+            <Main isLoggedIn={isLoggedIn} />
+          </Route>
 
-        <Route path="/signup">
-          {!isLoggedIn ? <Register onRegister={handleRegister} /> : <Redirect to="/movies" />}
-        </Route>
-        <Route path="/signin">
-          {!isLoggedIn ? <Login onLogin={handleLogin} /> : <Redirect to="/movies" />}
-        </Route>
+          <Route path="/signup">
+            {!isLoggedIn ? <Register onRegister={handleRegister} /> : <Redirect to="/movies" />}
+          </Route>
+          <Route path="/signin">
+            {!isLoggedIn ? <Login onLogin={handleLogin} /> : <Redirect to="/movies" />}
+          </Route>
 
-        <ProtectedRoute
-          path="/movies"
-          isLoggedIn={isLoggedIn}
-          component={Movies}
-          isFetched={isFetched}
-          isLoading={isLoading}
-          searchMovies={searchMovies}
-          movies={movies}
-          saveMovie={saveMovie}
-          removeMovie={removeMovie}
-          savedMoviesIds={savedMoviesIds}
-        />
+          <ProtectedRoute
+            path="/movies"
+            isLoggedIn={isLoggedIn}
+            component={Movies}
+            isFetched={isFetched}
+            isLoading={isLoading}
+            searchMovies={searchMovies}
+            movies={movies}
+            saveMovie={saveMovie}
+            removeMovie={removeMovie}
+            savedMoviesIds={savedMoviesIds}
+          />
 
-        <ProtectedRoute
-          path="/saved-movies"
-          isLoggedIn={isLoggedIn}
-          component={SavedMovies}
-          searchMovies={searchSavedMovies}
-          movies={filteredSavedMovies}
-          removeMovie={removeMovie}
-          savedMoviesIds={savedMoviesIds}
-        />
+          <ProtectedRoute
+            path="/saved-movies"
+            isLoggedIn={isLoggedIn}
+            component={SavedMovies}
+            searchMovies={searchSavedMovies}
+            movies={filteredSavedMovies}
+            removeMovie={removeMovie}
+            savedMoviesIds={savedMoviesIds}
+          />
 
-        <ProtectedRoute
-          path="/profile"
-          isLoggedIn={isLoggedIn}
-          component={Profile}
-          onSignout={handleSignout}
-          onUpdateProfile={handleUpdateProfile}
-        />
+          <ProtectedRoute
+            path="/profile"
+            isLoggedIn={isLoggedIn}
+            component={Profile}
+            onSignout={handleSignout}
+            onUpdateProfile={handleUpdateProfile}
+          />
 
-        <Route path='*' component={NotFound} />
-      </Switch>
+          <Route path='*' component={NotFound} />
+        </Switch>
+      }
 
       <InfoTooltip
         error={error}
