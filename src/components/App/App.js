@@ -56,9 +56,9 @@ const App = () => {
     }
   }, []);
 
-  const handleRegister = async (userData) => {
+  const handleLogin = async (userData) => {
     try {
-      const user = await api.register(userData);
+      const user = await api.login(userData);
 
       setCurrentUser(user);
       setIsLoggedIn(true);
@@ -68,12 +68,11 @@ const App = () => {
     }
   };
 
-  const handleLogin = async (userData) => {
+  const handleRegister = async (userData) => {
     try {
-      const user = await api.login(userData);
+      await api.register(userData);
 
-      setCurrentUser(user);
-      setIsLoggedIn(true);
+      handleLogin({ email: userData.email, password: userData.password });
     } catch (err) {
       setError(err);
       setIsInfoTooltipOpen(true);
