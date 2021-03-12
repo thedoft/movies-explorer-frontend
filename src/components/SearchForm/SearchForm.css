@@ -1,5 +1,6 @@
 .search-form {
   width: 100%;
+  max-width: 1440px;
   padding: 0 70px;
   box-sizing: border-box;
   background: #FAFAFA;
