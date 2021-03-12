@@ -26,16 +26,16 @@ const MoviesCard = ({
 
   const handleSave = () => {
     onSave({
-      country,
-      director,
-      duration,
-      year,
-      description,
-      image,
-      trailer,
-      thumbnail,
-      nameRU,
-      nameEN,
+      country: country || 'Не указано',
+      director: director || 'Не указано',
+      duration: duration || 0,
+      year: year || 'Не указано',
+      description: description || 'Не указано',
+      image: image || 'https://djkazu.supervinyl.net/application/files/9914/6139/6114/diary_detail_no_image.png',
+      trailer: (trailer && trailer.startsWith('http')) ? trailer : 'https://youtube.com',
+      thumbnail: thumbnail || 'https://djkazu.supervinyl.net/application/files/9914/6139/6114/diary_detail_no_image.png',
+      nameRU: nameRU || 'Не указано',
+      nameEN: nameEN || 'Не указано',
       movieId,
     });
   };
