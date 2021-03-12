@@ -5,13 +5,13 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 
-const SavedMovies = ({ movies, removeMovie }) => (
+const SavedMovies = ({ movies, removeMovie, savedMoviesIds }) => (
   <>
     <Header>
       <Navigation />
     </Header>
     <SearchForm />
-    <MoviesCardList movies={movies} removeMovie={removeMovie} />
+    <MoviesCardList movies={movies} removeMovie={removeMovie} savedMoviesIds={savedMoviesIds} />
     <Footer />
   </>
 );

@@ -24,6 +24,7 @@ const App = () => {
 
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
+  const [savedMoviesIds, setSavedMoviesIds] = useState([]);
 
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const [error, setError] = useState({});
@@ -135,10 +136,10 @@ const App = () => {
     try {
       const fetchedSavedMovies = await api.getMovies();
 
-      const savedMoviesIds = fetchedSavedMovies.map((movie) => movie.movieId);
+      const fetchedSavedMoviesIds = fetchedSavedMovies.map((movie) => movie.movieId);
 
       setSavedMovies(fetchedSavedMovies);
-      localStorage.setItem('savedMoviesIds', JSON.stringify(savedMoviesIds));
+      setSavedMoviesIds(fetchedSavedMoviesIds);
     } catch (err) {
       setError(err);
       setIsInfoTooltipOpen(true);
@@ -153,7 +154,10 @@ const App = () => {
 
   const saveMovie = async (movieData) => {
     try {
-      await api.saveMovie(movieData);
+      const savedMovie = await api.saveMovie(movieData);
+
+      setSavedMovies([...savedMovies, savedMovie]);
+      setSavedMoviesIds([...savedMoviesIds, savedMovie.movieId]);
     } catch (err) {
       setError(err);
       setIsInfoTooltipOpen(true);
@@ -162,7 +166,13 @@ const App = () => {
 
   const removeMovie = async (movieId) => {
     try {
-      await api.removeMovie(movieId);
+      const removedMovie = await api.removeMovie(movieId);
+
+      const filteredMovies = savedMovies.filter((movie) => movie.movieId !== removedMovie.movieId);
+      const filteredMoviesIds = savedMoviesIds.filter((id) => id !== removedMovie.movieId);
+
+      setSavedMovies(filteredMovies);
+      setSavedMoviesIds(filteredMoviesIds);
     } catch (err) {
       setError(err);
       setIsInfoTooltipOpen(true);
@@ -193,6 +203,7 @@ const App = () => {
           movies={movies}
           saveMovie={saveMovie}
           removeMovie={removeMovie}
+          savedMoviesIds={savedMoviesIds}
         />
 
         <ProtectedRoute
@@ -201,6 +212,7 @@ const App = () => {
           component={SavedMovies}
           movies={savedMovies}
           removeMovie={removeMovie}
+          savedMoviesIds={savedMoviesIds}
         />
 
         <ProtectedRoute

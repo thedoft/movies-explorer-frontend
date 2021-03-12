@@ -6,7 +6,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 
 const Movies = ({
-  getMovies, movies, saveMovie, removeMovie, isFetched, isLoading,
+  getMovies, movies, saveMovie, removeMovie, isFetched, isLoading, savedMoviesIds,
 }) => (
   <>
     <Header>
@@ -20,6 +20,7 @@ const Movies = ({
           isLoading={isLoading}
           saveMovie={saveMovie}
           removeMovie={removeMovie}
+          savedMoviesIds={savedMoviesIds}
         />
     }
     <Footer />
