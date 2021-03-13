@@ -15,6 +15,7 @@ const MoviesCardList = ({
   const [renderedMoviesLength, setRenderedMoviesLength] = useState(0);
   const [renderedMoviesCount, setRenderedMoviesCount] = useState(0);
   const [MoviesToMoreRenderCount, setMoviesToMoreRenderCount] = useState(0);
+  const [moviesCountForMore, setMoviesCountForMore] = useState(0);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const location = window.location.pathname;
@@ -40,6 +41,8 @@ const MoviesCardList = ({
 
   useEffect(() => {
     if (location === '/movies') {
+      setMoviesCountForMore(3);
+
       if (windowWidth <= 480) {
         setRenderedMoviesCount(moviesCountToRenderS);
         setMoviesToMoreRenderCount(moviesCountToMoreRenderS);
@@ -51,6 +54,7 @@ const MoviesCardList = ({
         setMoviesToMoreRenderCount(moviesCountToMoreRenderB);
       }
     } else {
+      setMoviesCountForMore(Infinity);
       setRenderedMoviesCount(movies.length);
     }
   }, [windowWidth, location, movies.length]);
@@ -85,7 +89,7 @@ const MoviesCardList = ({
           </ul>
       }
       {
-        (!isLoading && movies.length > 3 && renderedMoviesLength !== movies.length)
+        (!isLoading && movies.length > moviesCountForMore && renderedMoviesLength !== movies.length)
           && <button onClick={handleMoreClick} className="movies__more-button">Еще</button>
         }
     </section>
