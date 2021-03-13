@@ -15,6 +15,8 @@ import * as api from '../../utils/MainApi';
 import * as moviesApi from '../../utils/MoviesApi';
 import filterSearch from '../../utils/utils';
 import { fetchError } from '../../utils/constants';
+import successImg from '../../images/success.png';
+import errorImg from '../../images/error.png';
 
 const App = () => {
   const [isTokenChecked, setIsTokenChecked] = useState(false);
@@ -30,7 +32,20 @@ const App = () => {
   const [filteredSavedMovies, setFilteredSavedMovies] = useState([]);
 
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
-  const [error, setError] = useState({});
+  const [message, setMessage] = useState('');
+  const [infoTooltipImage, setInfoTooltipImage] = useState('');
+
+  const showError = (err) => {
+    setMessage(err.message);
+    setInfoTooltipImage(errorImg);
+    setIsInfoTooltipOpen(true);
+  };
+
+  const showSuccess = () => {
+    setMessage('Успешно!');
+    setInfoTooltipImage(successImg);
+    setIsInfoTooltipOpen(true);
+  };
 
   useEffect(() => {
     const getUserData = async () => {
@@ -39,6 +54,9 @@ const App = () => {
 
         setCurrentUser(user);
         setIsLoggedIn(true);
+      } catch (err) {
+        setCurrentUser({});
+        setIsLoggedIn(false);
       } finally {
         setIsTokenChecked(true);
       }
@@ -63,8 +81,7 @@ const App = () => {
       setCurrentUser(user);
       setIsLoggedIn(true);
     } catch (err) {
-      setError(err);
-      setIsInfoTooltipOpen(true);
+      showError(err);
     }
   };
 
@@ -74,8 +91,7 @@ const App = () => {
 
       handleLogin({ email: userData.email, password: userData.password });
     } catch (err) {
-      setError(err);
-      setIsInfoTooltipOpen(true);
+      showError(err);
     }
   };
 
@@ -88,8 +104,7 @@ const App = () => {
 
       localStorage.clear();
     } catch (err) {
-      setError(err);
-      setIsInfoTooltipOpen(true);
+      showError(err);
     }
   };
 
@@ -98,9 +113,9 @@ const App = () => {
       const user = await api.updateProfile(userData);
 
       setCurrentUser(user);
+      showSuccess();
     } catch (err) {
-      setError(err);
-      setIsInfoTooltipOpen(true);
+      showError(err);
     }
   };
 
@@ -128,29 +143,28 @@ const App = () => {
       setMovies(formattedFetchedMovies);
       localStorage.setItem('fetchedMovies', JSON.stringify(formattedFetchedMovies));
     } catch (err) {
-      setError({ message: fetchError });
+      setMessage({ message: fetchError });
       setIsInfoTooltipOpen(true);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const getSavedMovies = async () => {
-    try {
-      const fetchedSavedMovies = await api.getMovies();
-
-      const fetchedSavedMoviesIds = fetchedSavedMovies.map((movie) => movie.movieId);
-
-      setSavedMovies(fetchedSavedMovies);
-      setSavedMoviesIds(fetchedSavedMoviesIds);
-      setFilteredSavedMovies(fetchedSavedMovies);
-    } catch (err) {
-      setError(err);
-      setIsInfoTooltipOpen(true);
-    }
-  };
-
   useEffect(() => {
+    const getSavedMovies = async () => {
+      try {
+        const fetchedSavedMovies = await api.getMovies();
+
+        const fetchedSavedMoviesIds = fetchedSavedMovies.map((movie) => movie.movieId);
+
+        setSavedMovies(fetchedSavedMovies);
+        setSavedMoviesIds(fetchedSavedMoviesIds);
+        setFilteredSavedMovies(fetchedSavedMovies);
+      } catch (err) {
+        showError(err);
+      }
+    };
+
     if (isLoggedIn) {
       getSavedMovies();
     }
@@ -170,8 +184,7 @@ const App = () => {
       setSavedMoviesIds([...savedMoviesIds, savedMovie.movieId]);
       setFilteredSavedMovies([...savedMovies, savedMovie]);
     } catch (err) {
-      setError(err);
-      setIsInfoTooltipOpen(true);
+      showError(err);
     }
   };
 
@@ -186,8 +199,7 @@ const App = () => {
       setSavedMoviesIds(filteredMoviesIds);
       setFilteredSavedMovies(filteredMovies);
     } catch (err) {
-      setError(err);
-      setIsInfoTooltipOpen(true);
+      showError(err);
     }
   };
 
@@ -242,7 +254,8 @@ const App = () => {
       }
 
       <InfoTooltip
-        error={error}
+        image={infoTooltipImage}
+        message={message}
         isOpen={isInfoTooltipOpen}
         setIsOpen={setIsInfoTooltipOpen}
       />

@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import './InfoTooltip.css';
-import errorImg from '../../images/error.png';
 
-const InfoTooltip = ({ error, isOpen, setIsOpen }) => {
+const InfoTooltip = ({
+  image, message, isOpen, setIsOpen,
+}) => {
   const closePopup = () => {
     setIsOpen(false);
   };
@@ -30,8 +31,8 @@ const InfoTooltip = ({ error, isOpen, setIsOpen }) => {
   return (
     <div onClick={handleLayoutClick} className={`popup ${isOpen && 'popup_opened'}`}>
       <div className="popup__container">
-        <img className="popup__image" src={errorImg} alt="Ошибка при совершении запроса" />
-        <p className="popup__text">{error.message}</p>
+        <img className="popup__image" src={image} alt="Результат запроса" />
+        <p className="popup__text">{message}</p>
         <button className="popup__close-button" onClick={closePopup} />
       </div>
     </div>
