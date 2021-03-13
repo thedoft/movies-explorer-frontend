@@ -13,7 +13,7 @@ import './App.css';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import * as api from '../../utils/MainApi';
 import * as moviesApi from '../../utils/MoviesApi';
-import filterSearch from '../../utils/utils';
+import { filterSearch, reformatMovies } from '../../utils/utils';
 import { fetchErrorMessage, successMessage } from '../../utils/constants';
 import successImg from '../../images/success.png';
 import errorImg from '../../images/error.png';
@@ -141,17 +141,7 @@ const App = () => {
 
       fetchedMovies = filterSearch(fetchedMovies, keyword, isIncludesShorts);
 
-      const formattedFetchedMovies = fetchedMovies.map((movie) => {
-        const formattedMovie = {
-          ...movie,
-          movieId: movie.id,
-          image: movie.image ? (moviesApi.BASE_URL + movie.image.url) : '',
-          thumbnail: movie.image ? (moviesApi.BASE_URL + movie.image.formats.thumbnail.url) : '',
-          trailer: movie.trailerLink,
-        };
-
-        return formattedMovie;
-      });
+      const formattedFetchedMovies = reformatMovies(fetchedMovies, moviesApi.BASE_URL);
 
       setMovies(formattedFetchedMovies);
       localStorage.setItem('fetchedMovies', JSON.stringify(formattedFetchedMovies));

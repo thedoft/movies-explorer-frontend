@@ -1,4 +1,4 @@
-const filterSearch = (movies, keyword, isIncludesShorts) => {
+export const filterSearch = (movies, keyword, isIncludesShorts) => {
   const minDuration = isIncludesShorts ? 0 : 40;
 
   return (
@@ -10,4 +10,14 @@ const filterSearch = (movies, keyword, isIncludesShorts) => {
   );
 };
 
-export default filterSearch;
+export const reformatMovies = (movies, BASE_URL) => movies.map((movie) => {
+  const formattedMovie = {
+    ...movie,
+    movieId: movie.id,
+    image: movie.image ? (BASE_URL + movie.image.url) : '',
+    thumbnail: movie.image ? (BASE_URL + movie.image.formats.thumbnail.url) : '',
+    trailer: movie.trailerLink,
+  };
+
+  return formattedMovie;
+});

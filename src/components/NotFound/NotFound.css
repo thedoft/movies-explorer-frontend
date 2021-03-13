@@ -29,6 +29,7 @@
   line-height: 17px;
   color: #3456f3;
   background: transparent;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {
