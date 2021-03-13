@@ -72,7 +72,7 @@ const MoviesCardList = ({
                   moviesToRender.push(
                     <MoviesCard
                       movie={movie}
-                      key={movie.id}
+                      key={movie.movieId}
                       onSave={saveMovie}
                       onRemove={removeMovie}
                       savedMoviesIds={savedMoviesIds}

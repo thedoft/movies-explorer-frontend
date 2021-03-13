@@ -4,7 +4,7 @@ import Section from '../Section/Section';
 import Form from '../Form/Form';
 import useFormWithValidation from '../../hooks/useFormWithValidation';
 
-const Register = ({ onRegister }) => {
+const Register = ({ onRegister, isFormDisabled }) => {
   const {
     values, handleChange, errors, isValid,
   } = useFormWithValidation({ name: '', email: '', password: '' });
@@ -25,8 +25,9 @@ const Register = ({ onRegister }) => {
           data={values}
           onSubmit={onRegister}
           isValid={isValid}
+          isFormDisabled={isFormDisabled}
         >
-          <fieldset className="form__fieldset">
+          <fieldset className="form__fieldset" disabled={isFormDisabled}>
             <label className="form__label" htmlFor="name">Имя</label>
             <input name="name" value={values.name} onChange={handleChange} className="form__input" id="name" required minLength={2} maxLength={30} autoComplete="current-name" pattern="^[а-яА-ЯЁё\s\-]+$" />
             <span className="form__error">{errors.name}</span>

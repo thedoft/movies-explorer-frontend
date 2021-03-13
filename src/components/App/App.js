@@ -25,6 +25,7 @@ const App = () => {
 
   const [isFetched, setIsFetched] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isFormDisabled, setIsFormDisabled] = useState(false);
 
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
@@ -76,22 +77,30 @@ const App = () => {
 
   const handleLogin = async (userData) => {
     try {
+      setIsFormDisabled(true);
+
       const user = await api.login(userData);
 
       setCurrentUser(user);
       setIsLoggedIn(true);
     } catch (err) {
       showError(err);
+    } finally {
+      setIsFormDisabled(false);
     }
   };
 
   const handleRegister = async (userData) => {
     try {
+      setIsFormDisabled(true);
+
       await api.register(userData);
 
       handleLogin({ email: userData.email, password: userData.password });
     } catch (err) {
       showError(err);
+    } finally {
+      setIsFormDisabled(false);
     }
   };
 
@@ -110,12 +119,16 @@ const App = () => {
 
   const handleUpdateProfile = async (userData) => {
     try {
+      setIsFormDisabled(true);
+
       const user = await api.updateProfile(userData);
 
       setCurrentUser(user);
       showSuccess();
     } catch (err) {
       showError(err);
+    } finally {
+      setIsFormDisabled(false);
     }
   };
 
@@ -212,10 +225,22 @@ const App = () => {
           </Route>
 
           <Route path="/signup">
-            {!isLoggedIn ? <Register onRegister={handleRegister} /> : <Redirect to="/movies" />}
+            {!isLoggedIn
+              ? <Register
+                onRegister={handleRegister}
+                isFormDisabled={isFormDisabled}
+              />
+              : <Redirect to="/movies" />
+            }
           </Route>
+
           <Route path="/signin">
-            {!isLoggedIn ? <Login onLogin={handleLogin} /> : <Redirect to="/movies" />}
+            {!isLoggedIn
+              ? <Login
+                onLogin={handleLogin}
+                isFormDisabled={isFormDisabled}
+              /> : <Redirect to="/movies" />
+            }
           </Route>
 
           <ProtectedRoute
@@ -247,6 +272,7 @@ const App = () => {
             component={Profile}
             onSignout={handleSignout}
             onUpdateProfile={handleUpdateProfile}
+            isFormDisabled={isFormDisabled}
           />
 
           <Route path='*' component={NotFound} />

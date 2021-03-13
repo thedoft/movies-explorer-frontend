@@ -7,7 +7,7 @@ import './Profile.css';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import useFormWithValidation from '../../hooks/useFormWithValidation';
 
-const Profile = ({ onSignout, onUpdateProfile }) => {
+const Profile = ({ onSignout, onUpdateProfile, isFormDisabled }) => {
   const currentUser = useContext(CurrentUserContext);
 
   const initValues = { name: currentUser.name, email: currentUser.email };
@@ -35,8 +35,9 @@ const Profile = ({ onSignout, onUpdateProfile }) => {
           data={values}
           onSubmit={onUpdateProfile}
           isValid={isProfileValid}
+          isFormDisabled={isFormDisabled}
         >
-          <fieldset className="form__fieldset form__fieldset_section_profile">
+          <fieldset className="form__fieldset form__fieldset_section_profile" disabled={isFormDisabled}>
             <div className="form__input-container">
               <label className="form__label form__label_section_profile" htmlFor="name">
                 Имя

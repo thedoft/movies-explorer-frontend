@@ -4,7 +4,7 @@ import Section from '../Section/Section';
 import Form from '../Form/Form';
 import useFormWithValidation from '../../hooks/useFormWithValidation';
 
-const Login = ({ onLogin }) => {
+const Login = ({ onLogin, isFormDisabled }) => {
   const {
     values, handleChange, errors, isValid,
   } = useFormWithValidation({ email: '', password: '' });
@@ -25,8 +25,9 @@ const Login = ({ onLogin }) => {
           data={values}
           onSubmit={onLogin}
           isValid={isValid}
+          isFormDisabled={isFormDisabled}
         >
-          <fieldset className="form__fieldset">
+          <fieldset className="form__fieldset" disabled={isFormDisabled}>
             <label className="form__label" htmlFor="email">E-mail</label>
             <input name="email" value={values.email} onChange={handleChange} type="email" className="form__input" id="email" required autoComplete="current-email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" readOnly onFocus={handleFocus} />
             <span className="form__error">{errors.email}</span>
