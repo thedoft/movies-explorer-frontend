@@ -1,4 +1,13 @@
-export const fetchError = 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз';
+// messages
+export const fetchErrorMessage = 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз';
+export const successMessage = 'Успешно!';
+
+// render movies counts
+export const moviesCountToRenderS = 5;
+export const moviesCountToRenderM = 8;
+export const moviesCountToRenderB = 12;
+export const moviesCountToMoreRenderS = 2;
+export const moviesCountToMoreRenderB = 3;
 
 // contacts
 export const facebook = 'https://www.facebook.com/thedoft';

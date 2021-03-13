@@ -14,7 +14,7 @@ import CurrentUserContext from '../../contexts/CurrentUserContext';
 import * as api from '../../utils/MainApi';
 import * as moviesApi from '../../utils/MoviesApi';
 import filterSearch from '../../utils/utils';
-import { fetchError } from '../../utils/constants';
+import { fetchErrorMessage, successMessage } from '../../utils/constants';
 import successImg from '../../images/success.png';
 import errorImg from '../../images/error.png';
 
@@ -42,7 +42,7 @@ const App = () => {
   };
 
   const showSuccess = () => {
-    setMessage('Успешно!');
+    setMessage(successMessage);
     setInfoTooltipImage(successImg);
     setIsInfoTooltipOpen(true);
   };
@@ -143,7 +143,7 @@ const App = () => {
       setMovies(formattedFetchedMovies);
       localStorage.setItem('fetchedMovies', JSON.stringify(formattedFetchedMovies));
     } catch (err) {
-      setMessage({ message: fetchError });
+      setMessage(fetchErrorMessage);
       setIsInfoTooltipOpen(true);
     } finally {
       setIsLoading(false);

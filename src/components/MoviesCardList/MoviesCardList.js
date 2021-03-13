@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import Preloader from '../Preloader/Preloader';
 import './MoviesCardList.css';
+import {
+  moviesCountToRenderS, moviesCountToRenderM, moviesCountToRenderB,
+  moviesCountToMoreRenderS, moviesCountToMoreRenderB,
+} from '../../utils/constants';
 
 const MoviesCardList = ({
   movies, isLoading = false, saveMovie = () => {}, removeMovie, savedMoviesIds,
@@ -37,14 +41,14 @@ const MoviesCardList = ({
   useEffect(() => {
     if (location === '/movies') {
       if (windowWidth <= 480) {
-        setRenderedMoviesCount(5);
-        setMoviesToMoreRenderCount(2);
+        setRenderedMoviesCount(moviesCountToRenderS);
+        setMoviesToMoreRenderCount(moviesCountToMoreRenderS);
       } else if (windowWidth <= 768) {
-        setRenderedMoviesCount(8);
-        setMoviesToMoreRenderCount(2);
+        setRenderedMoviesCount(moviesCountToRenderM);
+        setMoviesToMoreRenderCount(moviesCountToMoreRenderS);
       } else {
-        setRenderedMoviesCount(12);
-        setMoviesToMoreRenderCount(3);
+        setRenderedMoviesCount(moviesCountToRenderB);
+        setMoviesToMoreRenderCount(moviesCountToMoreRenderB);
       }
     } else {
       setRenderedMoviesCount(movies.length);
