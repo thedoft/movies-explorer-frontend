@@ -10,6 +10,10 @@ const MoviesCard = ({
     nameRU, nameEN, duration, trailer, movieId,
   } = movie;
 
+  const durationHours = Math.floor(duration / 60);
+  const durationMinutes = duration - (durationHours * 60);
+  const durationString = `${durationHours}ч ${durationMinutes}м`;
+
   const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
@@ -49,7 +53,7 @@ const MoviesCard = ({
       <img className="movie__image" src={image || defaultMovieImage} alt={nameRU} onClick={handleClick} />
       <div className="movie__text-container">
         <p className="movie__title">{nameRU}</p>
-        <span className="movie__duration">{duration}</span>
+        <span className="movie__duration">{durationString}</span>
       </div>
       <button
         className={`movie__save-button ${isSaved && 'movie__saved-icon'}`}
