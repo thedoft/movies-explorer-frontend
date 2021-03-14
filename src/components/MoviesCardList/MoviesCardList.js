@@ -10,12 +10,8 @@ import {
 const MoviesCardList = ({
   movies, isLoading = false, saveMovie = () => {}, removeMovie, savedMoviesIds,
 }) => {
-  const renderedMovies = document.querySelectorAll('.movie');
-
-  const [renderedMoviesLength, setRenderedMoviesLength] = useState(0);
   const [renderedMoviesCount, setRenderedMoviesCount] = useState(0);
   const [MoviesToMoreRenderCount, setMoviesToMoreRenderCount] = useState(0);
-  const [moviesCountForMore, setMoviesCountForMore] = useState(0);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const location = window.location.pathname;
@@ -30,10 +26,6 @@ const MoviesCardList = ({
   };
 
   useEffect(() => {
-    setRenderedMoviesLength(renderedMovies.length);
-  }, [renderedMovies]);
-
-  useEffect(() => {
     window.addEventListener('resize', updateWindowWidth);
 
     return () => window.removeEventListener('resize', updateWindowWidth);
@@ -41,8 +33,6 @@ const MoviesCardList = ({
 
   useEffect(() => {
     if (location === '/movies') {
-      setMoviesCountForMore(3);
-
       if (windowWidth <= 480) {
         setRenderedMoviesCount(moviesCountToRenderS);
         setMoviesToMoreRenderCount(moviesCountToMoreRenderS);
@@ -54,7 +44,6 @@ const MoviesCardList = ({
         setMoviesToMoreRenderCount(moviesCountToMoreRenderB);
       }
     } else {
-      setMoviesCountForMore(Infinity);
       setRenderedMoviesCount(movies.length);
     }
   }, [windowWidth, location, movies.length]);
@@ -89,7 +78,7 @@ const MoviesCardList = ({
           </ul>
       }
       {
-        (!isLoading && movies.length > moviesCountForMore && renderedMoviesLength !== movies.length)
+        (!isLoading && movies.length > renderedMoviesCount)
           && <button onClick={handleMoreClick} className="movies__more-button">Еще</button>
         }
     </section>

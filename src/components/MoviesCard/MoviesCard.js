@@ -12,7 +12,7 @@ const MoviesCard = ({
 
   const durationHours = Math.floor(duration / 60);
   const durationMinutes = duration - (durationHours * 60);
-  const durationString = `${durationHours}ч ${durationMinutes}м`;
+  const durationString = durationHours ? `${durationHours}ч ${durationMinutes}м` : `${durationMinutes}мин`;
 
   const [isSaved, setIsSaved] = useState(false);
 

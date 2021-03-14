@@ -19,7 +19,7 @@ import successImg from '../../images/success.png';
 import errorImg from '../../images/error.png';
 
 const App = () => {
-  const [isTokenChecked, setIsTokenChecked] = useState(false);
+  const [isTokenChecked, setIsTokenChecked] = useState(false); // eslint-disable-line
   const [currentUser, setCurrentUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -30,7 +30,7 @@ const App = () => {
   const [searchedMovies, setSearchedMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
   const [savedMoviesIds, setSavedMoviesIds] = useState([]);
-  const [filteredSavedMovies, setFilteredSavedMovies] = useState([]);
+  const [searchedSavedMovies, setSearchedSavedMovies] = useState([]);
 
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const [message, setMessage] = useState('');
@@ -67,13 +67,13 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    const localSearchedMovies = JSON.parse(localStorage.getItem('searchedMovies'));
+    const localSearchedMovies = localStorage.getItem('searchedMovies');
 
-    if (localSearchedMovies) {
-      setSearchedMovies(localSearchedMovies);
+    if (isLoggedIn && localSearchedMovies) {
+      setSearchedMovies(JSON.parse(localSearchedMovies));
       setIsFetched(true);
     }
-  }, []);
+  }, [isLoggedIn]);
 
   const handleLogin = async (userData) => {
     try {
@@ -134,12 +134,12 @@ const App = () => {
     }
   };
 
-  const searchMovies = async (keyword) => {
+  const searchMovies = async (keyword, isIncludesShort) => {
     setIsLoading(true);
     setIsFetched(true);
 
     try {
-      let movies = JSON.parse(localStorage.getItem('movies'));
+      let movies = localStorage.getItem('movies');
 
       if (!movies) {
         const fetchedMovies = await moviesApi.getMovies();
@@ -147,9 +147,10 @@ const App = () => {
 
         localStorage.setItem('movies', JSON.stringify(formattedFetchedMovies));
         movies = formattedFetchedMovies;
+      } else {
+        movies = JSON.parse(movies);
       }
-
-      const filteredMovies = searchByKeyword(movies, keyword);
+      const filteredMovies = searchByKeyword(movies, keyword, isIncludesShort);
 
       setSearchedMovies(filteredMovies);
       localStorage.setItem('searchedMovies', JSON.stringify(filteredMovies));
@@ -161,15 +162,19 @@ const App = () => {
   };
 
   useEffect(() => {
+    let cleanupFunction = false;
+
     const getSavedMovies = async () => {
       try {
         const fetchedSavedMovies = await api.getMovies();
 
         const fetchedSavedMoviesIds = fetchedSavedMovies.map((movie) => movie.movieId);
 
-        setSavedMovies(fetchedSavedMovies);
-        setSavedMoviesIds(fetchedSavedMoviesIds);
-        setFilteredSavedMovies(fetchedSavedMovies);
+        if (!cleanupFunction) {
+          setSavedMovies(fetchedSavedMovies);
+          setSavedMoviesIds(fetchedSavedMoviesIds);
+          setSearchedSavedMovies(fetchedSavedMovies);
+        }
       } catch (err) {
         showError(err.message);
       }
@@ -178,12 +183,16 @@ const App = () => {
     if (isLoggedIn) {
       getSavedMovies();
     }
+
+    return () => {
+      cleanupFunction = true;
+    };
   }, [isLoggedIn]);
 
-  const searchSavedMovies = (keyword) => {
-    const searchedSavedMovies = searchByKeyword(savedMovies, keyword);
+  const searchSavedMovies = (keyword, isIncludesShort) => {
+    const filteredSavedMovies = searchByKeyword(savedMovies, keyword, isIncludesShort);
 
-    setFilteredSavedMovies(searchedSavedMovies);
+    setSearchedSavedMovies(filteredSavedMovies);
   };
 
   const saveMovie = async (movieData) => {
@@ -192,7 +201,7 @@ const App = () => {
 
       setSavedMovies([...savedMovies, savedMovie]);
       setSavedMoviesIds([...savedMoviesIds, savedMovie.movieId]);
-      setFilteredSavedMovies([...savedMovies, savedMovie]);
+      setSearchedSavedMovies([...savedMovies, savedMovie]);
     } catch (err) {
       showError(err.message);
     }
@@ -207,7 +216,7 @@ const App = () => {
 
       setSavedMovies(filteredMovies);
       setSavedMoviesIds(filteredMoviesIds);
-      setFilteredSavedMovies(filteredMovies);
+      setSearchedSavedMovies(filteredMovies);
     } catch (err) {
       showError(err.message);
     }
@@ -258,7 +267,7 @@ const App = () => {
             isLoggedIn={isLoggedIn}
             component={SavedMovies}
             searchMovies={searchSavedMovies}
-            movies={filteredSavedMovies}
+            movies={searchedSavedMovies}
             removeMovie={removeMovie}
             savedMoviesIds={savedMoviesIds}
           />

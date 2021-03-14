@@ -18,7 +18,7 @@ const SearchForm = ({ searchMovies }) => {
       setError(searchErrorMessage);
     } else {
       setError('');
-      searchMovies(movie);
+      searchMovies(movie, checked.current.checked);
     }
   };
 

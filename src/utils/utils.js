@@ -1,7 +1,3 @@
-export const searchByKeyword = (movies, keyword) => movies.filter(
-  (movie) => movie.nameRU.toLowerCase().includes(keyword.toLowerCase()),
-);
-
 export const reformatMovies = (movies, BASE_URL) => movies.map((movie) => {
   const formattedMovie = {
     ...movie,
@@ -13,3 +9,18 @@ export const reformatMovies = (movies, BASE_URL) => movies.map((movie) => {
 
   return formattedMovie;
 });
+
+export const searchByKeyword = (movies, keyword, isIncludesShort) => {
+  const minDuration = isIncludesShort ? 0 : 40;
+
+  return movies.filter(
+    (movie) => movie.nameRU.toLowerCase().includes(keyword.toLowerCase())
+      && movie.duration > minDuration,
+  );
+};
+
+export const filterByDuration = (movies, isIncludesShort) => {
+  const minDuration = isIncludesShort ? 0 : 40;
+
+  return movies.filter((movie) => movie.duration > minDuration);
+};
