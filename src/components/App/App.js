@@ -162,19 +162,15 @@ const App = () => {
   };
 
   useEffect(() => {
-    let cleanupFunction = false;
-
     const getSavedMovies = async () => {
       try {
         const fetchedSavedMovies = await api.getMovies();
 
         const fetchedSavedMoviesIds = fetchedSavedMovies.map((movie) => movie.movieId);
 
-        if (!cleanupFunction) {
-          setSavedMovies(fetchedSavedMovies);
-          setSavedMoviesIds(fetchedSavedMoviesIds);
-          setSearchedSavedMovies(fetchedSavedMovies);
-        }
+        setSavedMovies(fetchedSavedMovies);
+        setSavedMoviesIds(fetchedSavedMoviesIds);
+        setSearchedSavedMovies(fetchedSavedMovies);
       } catch (err) {
         showError(err.message);
       }
@@ -183,10 +179,6 @@ const App = () => {
     if (isLoggedIn) {
       getSavedMovies();
     }
-
-    return () => {
-      cleanupFunction = true;
-    };
   }, [isLoggedIn]);
 
   const searchSavedMovies = (keyword, isIncludesShort) => {

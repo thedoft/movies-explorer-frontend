@@ -10,17 +10,11 @@ export const reformatMovies = (movies, BASE_URL) => movies.map((movie) => {
   return formattedMovie;
 });
 
-export const searchByKeyword = (movies, keyword, isIncludesShort) => {
+export const searchByKeyword = (movies, keyword = '', isIncludesShort) => {
   const minDuration = isIncludesShort ? 0 : 40;
 
   return movies.filter(
-    (movie) => movie.nameRU.toLowerCase().includes(keyword.toLowerCase())
+    (movie) => (keyword ? movie.nameRU.toLowerCase().includes(keyword.toLowerCase()) : true)
       && movie.duration > minDuration,
   );
-};
-
-export const filterByDuration = (movies, isIncludesShort) => {
-  const minDuration = isIncludesShort ? 0 : 40;
-
-  return movies.filter((movie) => movie.duration > minDuration);
 };

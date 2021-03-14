@@ -11,6 +11,10 @@ const SearchForm = ({ searchMovies }) => {
     setMovie(evt.target.value);
   };
 
+  const handleCheckboxChange = () => {
+    searchMovies(movie, checked.current.checked);
+  };
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
@@ -33,7 +37,7 @@ const SearchForm = ({ searchMovies }) => {
           </div>
 
           <div className="search-form__checkbox-container">
-            <input ref={checked} className="search-form__checkbox" type="checkbox" id="switch" defaultChecked />
+            <input ref={checked} onChange={handleCheckboxChange} className="search-form__checkbox" type="checkbox" id="switch" defaultChecked />
             <label className="search-form__checkbox-label" htmlFor="switch">
               <span className="search-form__checkbox-switch" />
             </label>
