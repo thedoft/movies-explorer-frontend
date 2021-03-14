@@ -13,15 +13,12 @@ const SavedMovies = ({
       <Navigation />
     </Header>
     <SearchForm searchMovies={searchMovies} />
-    {
-      movies.length > 0
-        && <MoviesCardList
-          movies={movies}
-          isLoading={isLoading}
-          removeMovie={removeMovie}
-          savedMoviesIds={savedMoviesIds}
-        />
-    }
+    <MoviesCardList
+      movies={movies}
+      isLoading={isLoading}
+      removeMovie={removeMovie}
+      savedMoviesIds={savedMoviesIds}
+    />
     <Footer />
   </>
 );
