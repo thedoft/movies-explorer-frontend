@@ -1,6 +1,7 @@
 // messages
 export const fetchErrorMessage = 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз';
 export const successMessage = 'Успешно!';
+export const searchErrorMessage = 'Нужно ввести ключевое слово';
 
 // render movies counts
 export const moviesCountToRenderS = 5;

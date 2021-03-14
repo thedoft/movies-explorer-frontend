@@ -13,7 +13,7 @@ import './App.css';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import * as api from '../../utils/MainApi';
 import * as moviesApi from '../../utils/MoviesApi';
-import { filterSearch, reformatMovies } from '../../utils/utils';
+import { searchByKeyword, reformatMovies } from '../../utils/utils';
 import { fetchErrorMessage, successMessage } from '../../utils/constants';
 import successImg from '../../images/success.png';
 import errorImg from '../../images/error.png';
@@ -27,7 +27,7 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isFormDisabled, setIsFormDisabled] = useState(false);
 
-  const [movies, setMovies] = useState([]);
+  const [searchedMovies, setSearchedMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
   const [savedMoviesIds, setSavedMoviesIds] = useState([]);
   const [filteredSavedMovies, setFilteredSavedMovies] = useState([]);
@@ -36,8 +36,8 @@ const App = () => {
   const [message, setMessage] = useState('');
   const [infoTooltipImage, setInfoTooltipImage] = useState('');
 
-  const showError = (err) => {
-    setMessage(err.message);
+  const showError = (msg) => {
+    setMessage(msg);
     setInfoTooltipImage(errorImg);
     setIsInfoTooltipOpen(true);
   };
@@ -67,10 +67,10 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    const fetchedMovies = JSON.parse(localStorage.getItem('fetchedMovies'));
+    const localSearchedMovies = JSON.parse(localStorage.getItem('searchedMovies'));
 
-    if (fetchedMovies) {
-      setMovies(fetchedMovies);
+    if (localSearchedMovies) {
+      setSearchedMovies(localSearchedMovies);
       setIsFetched(true);
     }
   }, []);
@@ -84,7 +84,7 @@ const App = () => {
       setCurrentUser(user);
       setIsLoggedIn(true);
     } catch (err) {
-      showError(err);
+      showError(err.message);
     } finally {
       setIsFormDisabled(false);
     }
@@ -98,7 +98,7 @@ const App = () => {
 
       handleLogin({ email: userData.email, password: userData.password });
     } catch (err) {
-      showError(err);
+      showError(err.message);
     } finally {
       setIsFormDisabled(false);
     }
@@ -112,8 +112,10 @@ const App = () => {
       setCurrentUser({});
 
       localStorage.clear();
+      setSearchedMovies([]);
+      setIsFetched(false);
     } catch (err) {
-      showError(err);
+      showError(err.message);
     }
   };
 
@@ -126,28 +128,33 @@ const App = () => {
       setCurrentUser(user);
       showSuccess();
     } catch (err) {
-      showError(err);
+      showError(err.message);
     } finally {
       setIsFormDisabled(false);
     }
   };
 
-  const searchMovies = async (keyword, isIncludesShorts) => {
+  const searchMovies = async (keyword) => {
     setIsLoading(true);
     setIsFetched(true);
 
     try {
-      let fetchedMovies = await moviesApi.getMovies();
+      let movies = JSON.parse(localStorage.getItem('movies'));
 
-      fetchedMovies = filterSearch(fetchedMovies, keyword, isIncludesShorts);
+      if (!movies) {
+        const fetchedMovies = await moviesApi.getMovies();
+        const formattedFetchedMovies = reformatMovies(fetchedMovies, moviesApi.BASE_URL);
 
-      const formattedFetchedMovies = reformatMovies(fetchedMovies, moviesApi.BASE_URL);
+        localStorage.setItem('movies', JSON.stringify(formattedFetchedMovies));
+        movies = formattedFetchedMovies;
+      }
 
-      setMovies(formattedFetchedMovies);
-      localStorage.setItem('fetchedMovies', JSON.stringify(formattedFetchedMovies));
+      const filteredMovies = searchByKeyword(movies, keyword);
+
+      setSearchedMovies(filteredMovies);
+      localStorage.setItem('searchedMovies', JSON.stringify(filteredMovies));
     } catch (err) {
-      setMessage(fetchErrorMessage);
-      setIsInfoTooltipOpen(true);
+      showError(fetchErrorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -164,7 +171,7 @@ const App = () => {
         setSavedMoviesIds(fetchedSavedMoviesIds);
         setFilteredSavedMovies(fetchedSavedMovies);
       } catch (err) {
-        showError(err);
+        showError(err.message);
       }
     };
 
@@ -173,10 +180,10 @@ const App = () => {
     }
   }, [isLoggedIn]);
 
-  const searchSavedMovies = (keyword, isIncludesShorts) => {
-    const searchedMovies = filterSearch(savedMovies, keyword, isIncludesShorts);
+  const searchSavedMovies = (keyword) => {
+    const searchedSavedMovies = searchByKeyword(savedMovies, keyword);
 
-    setFilteredSavedMovies(searchedMovies);
+    setFilteredSavedMovies(searchedSavedMovies);
   };
 
   const saveMovie = async (movieData) => {
@@ -187,7 +194,7 @@ const App = () => {
       setSavedMoviesIds([...savedMoviesIds, savedMovie.movieId]);
       setFilteredSavedMovies([...savedMovies, savedMovie]);
     } catch (err) {
-      showError(err);
+      showError(err.message);
     }
   };
 
@@ -202,7 +209,7 @@ const App = () => {
       setSavedMoviesIds(filteredMoviesIds);
       setFilteredSavedMovies(filteredMovies);
     } catch (err) {
-      showError(err);
+      showError(err.message);
     }
   };
 
@@ -240,7 +247,7 @@ const App = () => {
             isFetched={isFetched}
             isLoading={isLoading}
             searchMovies={searchMovies}
-            movies={movies}
+            movies={searchedMovies}
             saveMovie={saveMovie}
             removeMovie={removeMovie}
             savedMoviesIds={savedMoviesIds}

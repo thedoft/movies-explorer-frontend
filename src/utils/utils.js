@@ -1,14 +1,6 @@
-export const filterSearch = (movies, keyword, isIncludesShorts) => {
-  const minDuration = isIncludesShorts ? 0 : 40;
-
-  return (
-    movies.filter(
-      (movie) => (
-        movie.nameRU.toLowerCase().includes(keyword.toLowerCase())
-        && movie.duration > minDuration),
-    )
-  );
-};
+export const searchByKeyword = (movies, keyword) => movies.filter(
+  (movie) => movie.nameRU.toLowerCase().includes(keyword.toLowerCase()),
+);
 
 export const reformatMovies = (movies, BASE_URL) => movies.map((movie) => {
   const formattedMovie = {

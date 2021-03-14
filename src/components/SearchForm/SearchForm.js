@@ -1,9 +1,8 @@
 import React, { useState, useRef } from 'react';
 import './SearchForm.css';
+import { searchErrorMessage } from '../../utils/constants';
 
 const SearchForm = ({ searchMovies }) => {
-  const searchError = 'Нужно ввести ключевое слово';
-
   const [error, setError] = useState('');
   const [movie, setMovie] = useState('');
   const checked = useRef();
@@ -16,10 +15,10 @@ const SearchForm = ({ searchMovies }) => {
     evt.preventDefault();
 
     if (!movie) {
-      setError(searchError);
+      setError(searchErrorMessage);
     } else {
       setError('');
-      searchMovies(movie, checked.current.checked);
+      searchMovies(movie);
     }
   };
 
