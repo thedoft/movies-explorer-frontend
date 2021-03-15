@@ -2,4 +2,11 @@
 
 Проект доступен по ссылке:
 
-https://movies-explorer.students.nomoredomains.rocks
+https://thedoft.movies-explorer.students.nomoredomains.rocks
+
+Jwt передается в куках. Чтобы приложение корректно работало локально, необходимо запустить бэк также локально, изменив BASE_URL в src/utils/MainAPi.js на закомментированный.
+Репозиторий бэка доступен по ссылке:
+
+https://github.com/thedoft/movies-explorer-api
+
+Также можно проверить работоспособность приложения по ссылке в начала README (на домене).

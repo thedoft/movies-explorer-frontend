@@ -1,5 +1,6 @@
 .search-form {
   width: 100%;
+  max-width: 1440px;
   padding: 0 70px;
   box-sizing: border-box;
   background: #FAFAFA;
@@ -7,7 +8,7 @@
 
 .search-form__container {
   width: 100%;
-  padding: 70px 0;
+  padding: 70px 0 40px;
   margin: 0 0 10px;
   border: none;
   border-bottom: 1px solid #E8E8E8;
@@ -21,6 +22,7 @@
   padding: 16px 0;
   box-sizing: border-box;
   display: flex;
+  margin-bottom: 10px;
 }
 
 .search-form__input-container {
@@ -126,6 +128,15 @@
   margin: 0;
   font-size: 13px;
   line-height: 18px;
+}
+
+.search-form__error {
+  color: #EE3465;
+  display: inline-block;
+  height: 20px;
+  width: 100%;
+  font-size: 15px;
+  line-height: 17px;
 }
 
 @media screen and (max-width: 1024px) {

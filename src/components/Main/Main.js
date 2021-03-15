@@ -10,12 +10,12 @@ import Portfolio from '../Portfolio/Portfolio';
 import Footer from '../Footer/Footer';
 import './Main.css';
 
-const isLoggedIn = false;
-
-const Main = () => (
+const Main = ({ isLoggedIn }) => (
   <>
     <Header mod="header_section_main">
-      {!isLoggedIn ? <AuthNav /> : <Navigation />}
+      {
+        !isLoggedIn ? <AuthNav /> : <Navigation />
+      }
     </Header>
     <Promo />
     <AboutProject />
